@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/Geometry%20Drawtech%202.0/fuentes/Roboto-Regular.ttf") format("truetype");
+
+}
+body
+{
+    font-family: "Roboto", Verdana;
+    background-color: rgba(0,0,0,0.9);
+    padding: 0px;
+    overflow: hidden;
+}
+#saludo
+{
+    font-size: 30px;
+    text-transform: uppercase;
+    color:white;
+    float: rigth;
+}
+#img
+{
+    padding-left:30px;
+}
+#container
+{
+    padding-top: 1px
+}
+#space
+{
+    background-color: transparent;
+    border-color: transparent;
+    width:50%;
+}

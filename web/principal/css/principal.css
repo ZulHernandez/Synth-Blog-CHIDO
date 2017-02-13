@@ -1,0 +1,108 @@
+/*CSS Document*/
+@font-face {
+    font-family: "Roboto";
+    src: url("/Synth_BLOG/fuentes/Roboto-Regular.ttf") format("truetype");
+
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track{
+    background-color:transparent;
+    color: #999999
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgba(99,99,99,0.8);
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: rgba(20,113,143,0.8);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: transparent;
+}
+
+body
+{
+    margin: 0px;
+    font-family: "Roboto";
+    color: white;
+    background-image: url(../../imgs/circul.jpg);
+    background-size: cover;
+    overflow-x: hidden;
+}
+txt
+{
+    font-size:22px;
+}
+#fondo
+{
+    width: 50%;
+    -webkit-transition-duration: 0.2s; 
+    transition: all 0.2s;
+    cursor: pointer;
+}
+#txt
+{
+    background-color: rgba(0,0,0,0.9);
+    width:100%;
+}
+#todo
+{
+    padding-top: 3%;
+}
+#fondo:hover
+{
+    -webkit-transform: scale(1.1);
+    alignment-adjust: center;
+}
+
+#fondo:active
+{
+    opacity: 0.6;
+}
+
+a:link, a:visited, a:hover, a:active
+{
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+#foot
+{
+    vertical-align: central;
+    text-align: center;
+    font-size: 10px;
+    clear:both;
+    background-color: #121D24;
+    font-family: "Roboto", verdana;
+    color: #999999;
+    width:100%;
+    bottom:0;
+    left:0;
+}
+
+#header
+{
+    background-color: #121D24;
+    width: 100%;
+    color:white;
+    font-size: 32px;
+    position: absolute;
+    z-index: -1;
+    padding: 22px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+main
+{
+    width: 100%;
+}
+

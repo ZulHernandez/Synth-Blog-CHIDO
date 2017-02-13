@@ -1,0 +1,82 @@
+
+/*CSS Document*/
+@font-face {
+    font-family: "Roboto";
+    src: url("/Synth_BLOG/fuentes/Roboto-Regular.ttf") format("truetype");
+
+}
+
+body
+{
+    font-family: "Roboto";
+    color: white;
+    background: url("../imgs/triangulos.jpg") no-repeat top center;
+    background-size: cover;
+    overflow: hidden;
+}
+
+#titulo
+{
+    font-size:64px;
+}
+#titulo1
+{
+    font-size: 54px;
+}
+
+txt
+{
+    font-size:32px;
+    white-space: normal;
+
+}
+
+#txt
+{
+    vertical-align: central;
+    margin: 2%;
+    border-radius: 7px;
+    background-color: rgba(0,0,0,0.9); 
+}
+
+#leer:link, #leer:visited, #leer:hover, #leer:active
+{
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+#foot
+{
+    vertical-align: central;
+    text-align: center;
+    font-size: 10px;
+    clear:both;
+    background-color: #121D24;
+    font-family: "Roboto", verdana;
+    color: #999999;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+
+#header
+{
+    background-color: #121D24;
+    width: 100%;
+    color:white;
+    font-size: 32px;
+    position: absolute;
+    z-index: -1;
+    padding: 22px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+#si:link, #si:visited, #si:hover, #si:active
+{
+    color: white;
+    text-decoration: none;
+    cursor: text;
+}

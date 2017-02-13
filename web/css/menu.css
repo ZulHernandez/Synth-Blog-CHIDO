@@ -1,0 +1,53 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/Geometry%20Drawtech%202.0/fuentes/Roboto-Regular.ttf") format("truetype");
+
+}
+body
+{
+    font-family: "Roboto", Verdana;
+}
+a:link, a:visited, a:hover, a:active
+{
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+button
+{
+    border-color:transparent;
+    background-color: transparent;
+    width: 100%;
+    text-align: center;
+    color:white;
+    text-transform: uppercase;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    -webkit-transition-duration: 0.2s; 
+    transition: all 0.2s;
+}
+
+#confi:hover
+{
+    background-color: rgb(36,131,208);
+}
+
+#cerrar:hover
+{
+    background-color: rgb(128,0,0);
+}
+
+#visual:hover
+{
+    background-color: rgb(251,196,68);
+}
+
+#entradas:hover
+{
+    background-color: rgb(0,159,0);
+}
+
+hr
+{
+    background-color: white;
+}

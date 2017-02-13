@@ -1,0 +1,120 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25-nov-2016, 1:12:08
+    Author     : Bear
+*/
+@font-face {
+    font-family: "Roboto";
+    src: url("/Synth_BLOG/fuentes/Roboto-Regular.ttf") format("truetype");
+}
+body{
+    font-family: "Roboto";
+    padding: 15px;
+}
+.container{
+    background-color: purple;
+    color: white;
+    display: inline-block;
+    width:95%;
+    padding: 10px;
+    border-radius: 7px;
+}
+::-webkit-scrollbar{
+  width: 10px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track{
+  background-color:transparent;
+  color: #999999
+}
+
+::-webkit-scrollbar-thumb{
+  background: rgba(99,99,99,0.8);
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: rgba(20,113,143,0.8);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: transparent;
+}
+.area
+{
+    background-color: #121D24;
+    color: black;
+    padding: 10px;
+    display: block;
+    border: none;
+    width: 95%;
+    overflow: none;
+    font-family: inherit;
+    height: 130px;
+    resize: none;
+    background-color: white;
+}
+#archivo
+{
+    background-color: inherit;
+    border-radius: 5px;
+    padding:10px
+}
+#enviar
+{
+    width: 40%;
+    background-color: RGB(21,133,183);
+    color: white;
+    border-color: transparent;
+    -webkit-transition-duration: 0.2s; 
+    transition: all 0.2s;
+    display: inline-block;
+    cursor: pointer;
+
+}
+#boto
+{
+    width: 20%;
+    background-color: RGB(21,133,183);
+    color: white;
+    border-color: transparent;
+    -webkit-transition-duration: 0.2s; 
+    transition: all 0.2s;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#enviar:hover,#boto:hover
+{
+    background-color: rgb(68,183,234); 
+    color:black;
+}
+
+.archivo
+{
+    cursor: pointer;
+}
+.file-upload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px; }
+
+.file-upload input.file-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0); }
+
+#enviar,#boto
+{
+    zoom:1.5;
+}  

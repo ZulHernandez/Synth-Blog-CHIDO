@@ -1,0 +1,177 @@
+@charset "utf-8";
+/*CSS Document*/
+@font-face {
+    font-family: "Roboto";
+    src: url("/Synth_BLOG/fuentes/Roboto-Regular.ttf") format("truetype");
+
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track{
+    background-color:transparent;
+    color: #999999
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgba(99,99,99,0.8);
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: rgba(20,113,143,0.8);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: transparent;
+}
+
+body
+{
+    overflow-x: hidden;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    margin: 0px;
+    background: url(../imgs/codigo.png);
+}
+
+#res
+{
+    white-space: normal;
+}
+.destino
+{
+    display: block;
+    margin: 20px;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.destino img
+{
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+}
+
+.textoPrincipal
+{
+    background-color: white;
+    color: #00088F;
+    border-radius: 5px;
+    padding: 5px;
+    width: 95%;
+    height: 30px;
+}
+
+.oculto
+{
+    display: none;
+}
+
+.especial
+{
+    display: block; 
+    font-family: monospace; 
+    color: black; 
+    width: 96%; 
+    height: 500px;
+    background-color: white;
+    border-radius: 7px;
+}
+
+.campo
+{
+    background-color: white;
+    border: 2px solid #00088F;
+    color: #00088F;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+table
+{
+    background-color: rgba(242,242,242,0.7);
+    color: #041D25;
+    width: 95%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#foot
+{
+    vertical-align: central;
+    text-align: center;
+    font-size: 10px;
+    clear:both;
+    background-color: #121D24;
+    font-family: "Roboto", verdana;
+    color: #999999;
+    width:100%;
+    bottom:0;
+    left:0;
+}
+
+#header
+{
+    background-color: #121D24;
+    width: 100%;
+    color:white;
+    font-size: 32px;
+    position: absolute;
+    z-index: -1;
+    padding: 22px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+a:link, a:visited, a:hover, a:active
+{
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+main
+{
+    width: 100%;
+}
+
+.button
+{
+    width: 40%;
+    background-color: RGB(21,133,183);
+    color: white;
+    border-color: transparent;
+    -webkit-transition-duration: 0.2s; 
+    transition: all 0.2s;
+    display: inline-block;
+    cursor: pointer;
+
+}
+
+.button:hover 
+{
+    background-color: rgb(68,183,234); 
+    color:black;
+}
+
+#div1
+{
+    padding-left: 3%;
+}
+
+#frase
+{
+    width: 100%;
+}
+
+#env
+{
+    font-size: 32px;
+    width: 100%;
+}

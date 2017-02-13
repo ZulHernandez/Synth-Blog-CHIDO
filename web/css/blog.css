@@ -1,0 +1,115 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/Geometry%20Drawtech%202.0/fuentes/Roboto-Regular.ttf") format("truetype");
+
+}
+#comentar,#mostrar
+{
+    background-color: RGB(21,133,183);
+    color: white;
+    border-color: transparent;
+    -webkit-transition-duration: 0.2s; 
+    transition: all 0.2s;
+    display: inline-block;
+    cursor: pointer;
+}
+#comentar:hover,#mostrar:hover
+{
+    background-color: rgb(68,183,234); 
+    color:black;
+}
+
+.archivo
+{
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    width: 100%;
+}
+.container
+{
+    padding: 0px;
+    min-height: 200px;
+    margin:0px;
+    border-radius: 5px;
+}
+gatito
+{
+    font-size: 35px;
+}
+.coments
+{
+    margin-left: 15px;
+    padding: 5px;
+    background-color: RGB(15,54,87);
+    display: block;
+    min-height: 50px;
+    color: white;
+}
+.comment1
+{
+    margin: 5px;
+    padding: 5px;
+    background-color: inherit;
+    border: 1px solid white;
+}   
+.user
+{
+    margin: 5px;
+    padding: 5px;
+    background-color: orange;
+}
+.text
+{
+    margin: 5px;
+    padding: 5px;
+    background-color: white;
+}
+.post
+{
+    background-color: white;
+    margin-top: 15px;
+    margin-left: 15px;
+    padding: 15px;
+    display: block;
+    min-height: 50px;
+    border-radius: 5px;
+}
+.message
+{
+    background-color: green;
+    margin-top: 15px;
+    margin-left: 15px;
+    padding: 15px;
+    display: block;
+    min-height: 50px;
+    border-radius: 5px;
+}
+.image
+{
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track{
+    background-color:transparent;
+    color: #999999
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgba(99,99,99,0.8);
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: rgba(20,113,143,0.8);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: transparent;
+}

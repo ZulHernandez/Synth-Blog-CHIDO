@@ -1,0 +1,95 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/Geometry%20Drawtech%202.0/fuentes/Roboto-Regular.ttf") format("truetype");
+
+}
+.container
+{
+    padding:15px;
+    width:100%;
+}
+body
+{
+    padding: 20px;
+    background-color: RGB(31,89,120);
+    font-family: "Roboto",arial;
+}
+#avatar
+{
+    float: left;
+    margin-right: 20px;
+}
+#forma
+{
+    display: inline-block;
+    width:100%;
+    padding: 10px;
+    border-radius: 7px;
+    background-color: white;
+}
+#imagenavatar
+{
+    width: 64px;
+    height: 64px;
+}
+#autor
+{
+    margin: 10px;
+}
+#contenido
+{
+    background-color: #121D24;
+    color: white;
+    padding: 10px;
+    display: block;
+    border: none;
+    width: 100%;
+    overflow: none;
+    font-family: inherit;
+    height: 64%;
+    resize: none;
+
+    /*word-wrap: break-word;
+    vertical-align: top;
+    line-height: 20px;
+    word-break: keep-all;
+    min-height: 64px;
+    background-color: white;*/
+}
+#contenido
+{
+    padding: 10px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    width: 100%;
+    overflow: auto;
+    font-family: inherit;
+
+}
+#archivo
+{
+    background-color: white;
+    border-radius: 5px;
+    padding:10px
+}
+#botones
+{
+    background-color: white;
+    border-radius: 5px;
+    padding:10px;
+}
+.boton
+{
+    background-color: RGB(31,89,120);
+    color: white;
+    font-size: 12px;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-size: 15px;
+}
+.archivo
+{
+    cursor: pointer;
+}

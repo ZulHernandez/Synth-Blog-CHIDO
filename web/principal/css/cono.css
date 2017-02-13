@@ -1,0 +1,114 @@
+/*CSS Document*/
+@font-face {
+    font-family: "Roboto";
+    src: url("/Synth_BLOG/fuentes/Roboto-Regular.ttf") format("truetype");
+
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track{
+    background-color:transparent;
+    color: #999999
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgba(99,99,99,0.8);
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: rgba(20,113,143,0.8);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: transparent;
+}
+
+body
+{
+    font-family: "Roboto", sans-serif;
+    color: white;
+    margin: 0px;
+    background: url("../imgs/tri.jpg");
+    overflow-x: hidden;
+}
+
+#titulo
+{
+    font-size:28px;
+}
+
+img {
+    transition: -webkit-transform 0.25s ease;
+}
+
+img:hover
+{
+    -webkit-transform: scale(1.1);
+    background: rgba(0,0,0,0.8);
+    padding: 10%;
+    alignment-adjust: center;
+}
+
+#txts
+{
+    zoom: 1.5;
+
+    background-color: rgba(20,113,143,0.8);
+    padding-right:40px;
+    padding-left:40px;
+    margin: 20px;
+    border-radius: 7px;
+}
+
+button
+{
+    font-size:18px;
+    border:transparent;
+    color:white;
+    cursor:pointer;
+    width: 100%;
+    text-align: left;
+}
+
+#foot
+{
+    vertical-align: central;
+    text-align: center;
+    font-size: 10px;
+    clear:both;
+    background-color: #121D24;
+    font-family: "Roboto", verdana;
+    color: #999999;
+    width:100%;
+    bottom:0;
+    left:0;
+}
+
+#header
+{
+    background-color: #121D24;
+    width: 100%;
+    color:white;
+    font-size: 32px;
+    position: absolute;
+    z-index: -1;
+    padding: 22px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+a:link, a:visited, a:hover, a:active
+{
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+main
+{
+    width: 100%;
+}

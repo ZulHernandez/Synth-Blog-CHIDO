@@ -1,0 +1,184 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/Synth_BLOG/fuentes/Roboto-Regular.ttf") format("truetype");
+
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track{
+    background-color:transparent;
+    color: #999999
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgba(99,99,99,0.8);
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: rgba(20,113,143,0.8);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: transparent;
+}
+
+#txt
+{
+    zoom: 1.5;
+    background-color: rgba(20,113,143,0.8);
+    padding-right:40px;
+    padding-left:40px;
+    margin: 20px;
+    border-radius: 7px;
+    line-height: 1;
+    height: 300px;
+}
+
+img
+{
+    width:16%;
+    padding: 5px;
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+    alignment-adjust: left;
+}
+
+img:active
+{
+    width:20%;
+}
+
+img:hover
+{
+    -webkit-box-shadow: 0px 0px 20px rgba(255,255,255,0.8);
+    -moz-box-shadow: 0px 0px 20px rgba(255,255,255,0.8);
+    box-shadow: 0px 0px 20px rgba(255,255,255,0.8);
+    padding: 0px;
+}
+
+body
+{
+    color: #D3E8EB;
+    background-color: #062D3F;
+    overflow: hidden;
+    font-family: "Roboto", sans-serif;
+    margin: 0px;
+}
+
+#foot
+{
+    vertical-align: central;
+    text-align: center;
+    font-size: 10px;
+    clear:both;
+    background-color: #121D24;
+    font-family: "Roboto", verdana;
+    color: #999999;
+    width:100%;
+    bottom:0;
+    left:0;
+}
+
+#header
+{
+    background-color: #121D24;
+    width: 100%;
+    color:white;
+    font-size: 32px;
+    position: absolute;
+    z-index: -1;
+    padding: 22px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+a:link, a:visited, a:hover, a:active
+{
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+main
+{
+    width: 100%;
+}
+
+#contenido
+{
+    background-color: #121D24;
+    color: white;
+    padding: 10px;
+    display: block;
+    border: none;
+    width: 100%;
+    overflow: none;
+    font-family: inherit;
+    height: 64%;
+    resize: none;
+}
+#contenidos
+{
+    background-color: #121D24;
+    color: white;
+    padding: 10px;
+    display: block;
+    border: none;
+    width: 50%;
+    overflow: none;
+    font-family: inherit;
+    resize: none;
+}
+
+table
+{
+    font-size: 12px;
+}
+
+button
+{
+    width: 40%;
+    background-color: RGB(6,45,63);
+    color: white;
+    border-color: transparent;
+    -webkit-transition-duration: 0.2s; 
+    transition: all 0.2s;
+    display: inline-block;
+    cursor: pointer;
+
+}
+
+button:hover 
+{
+    background-color: #121D24; 
+}
+
+button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.2s;
+}
+
+button span:after {
+    content: '>>';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.2s;
+}
+
+button:hover span {
+    padding-right: 25px;
+}
+
+button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
