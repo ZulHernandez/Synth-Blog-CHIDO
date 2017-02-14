@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : postear
     Created on : 30-nov-2016, 13:15:58
     Author     : Bear
@@ -57,17 +57,13 @@
             }
             function validar(){
                 var titulo = document.getElementById("titulo").value;
-                alert(titulo);
                 var descripcion = document.getElementById("descripcion").value;
-                alert(descripcion);
                 var categoria = document.getElementById("categoria").value;
-                alert(categoria);
                 var cabeceraI = document.getElementById("cabeceraI").value;
-                alert(cabeceraI);
                 var cabeceraA = document.getElementById("cabeceraA").value;
-                alert(cabeceraA);
                 if(titulo == "" || descripcion == "" || categoria == ""){
-                    swal({title: 'ERROR',text: 'Los campos no pueden ser vacios. Por favor, llenalos',type: 'error',showConfirmButton: true, html: false});
+                    //swal({title: 'ERROR',text: 'Los campos no pueden ser vacios. Por favor, llenalos',type: 'error',showConfirmButton: true, html: false});
+                    alert("error");
                 }else{
                     var data = new FormData();
                     jQuery.each(jQuery('#contenido')[0].files, function(i, file) {
@@ -94,11 +90,13 @@
                         type: 'POST',
                         success: function(respuesta){
                             if(respuesta.startsWith("ERROR")){
-                                swal({title: 'ERROR',text: respuesta.substring(7),type: 'error',showConfirmButton: true, html: false});
+                                //swal({title: "ERROR",text: respuesta.substring(7),type: "error",showConfirmButton: true, html: false});
+                                alert("error: " + respuesta.substring(7));
                                 document.getElementById("enviar").disabled = false;
                                 document.getElementById("enviar").value = "ENVIAR";
                             }else{
-                                swal({
+                                alert(respuesta);
+                                /*swal({
                                     title: "EXCELENTE",
                                     text: "Tu post ha sido publicado. dirigete a tu perfil para verlo!",
                                     type: "successs",
@@ -115,7 +113,7 @@
                                     } else {
                                         window.location = "postear.jsp";
                                     }
-                                  });
+                                  });*/
                             }
                         }
                     });

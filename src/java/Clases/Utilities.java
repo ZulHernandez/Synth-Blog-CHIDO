@@ -29,7 +29,8 @@ public class Utilities {
             }
             File[] ficherosimagen = destinoimagen.listFiles();
             int num = ficherosimagen.length + 1;
-            File fimagen = new File(destinoimagen + prefix + num + suffix);
+            File fimagen = new File(destinoimagen +"/"+ prefix + num + suffix);
+            System.out.println("Aqui!");
             System.out.println(fimagen);
             rutaimagen = "/Synth_BLOG/"+folder+"/" + prefix + num + suffix;
             FileOutputStream outimagen = new FileOutputStream(fimagen);

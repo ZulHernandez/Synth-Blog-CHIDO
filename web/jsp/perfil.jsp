@@ -1,4 +1,8 @@
-
+<%-- 
+    Document   : perfil
+    Created on : 29/11/2016, 12:59:51 PM
+    Author     : Alumno
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
@@ -8,16 +12,14 @@
 	String usr = "";
 	try{
 		usrId=sesion.getAttribute("id") == null?0:Integer.parseInt(sesion.getAttribute("id").toString());
-		usr=sesion.getAttribute("usuario") == null?"":sesion.getAttribute("id").toString();
+		usr=sesion.getAttribute("usuario") == null?"":sesion.getAttribute("usuario").toString();
 		bd = sesion.getAttribute("bd") == null ? 0 : Integer.parseInt(sesion.getAttribute("bd").toString());
-		if(usrId==0) throw new Exception("c:");
-               
+		if(usrId == 0) throw new Exception("c:");
 	}catch(Exception e){
 		response.sendRedirect("../login");
 	}
 	ldn.cPost post = new ldn.cPost(bd);
 	String[] src = post.obtenPost(usrId);
- 
 %>
 <!DOCTYPE html>
 <html>
@@ -28,7 +30,6 @@
         <script>
             
             function traePerfil(){
-                
                 $("#container").ready(
                         $.ajax({
                         url:"../agregaDatos",
@@ -50,12 +51,10 @@
                                         if( key=='correo')
                                             document.getElementById(key).innerHTML=value;
                                     else
-                                        if(key=='descripcion')
-                                            document.getElementById(key).innerHTML=value;
-                            });                                 
+                                        document.getElementById(key).value=value;
+                            })                                   
                         }
                     })
-                
                 );
             }
         </script>
@@ -102,15 +101,15 @@
             #imgPerfil{
                 position:relative;
                 top:10%;
-                left:5%;
-                width: 30%;
-                height:5%;
+                left:25%;
+                width: 50%;
+                height:25%;
             }
             #descripcion{
                 position:relative;
                 
                 top:10%;
-                left:5%;
+                left:25%;
                 width:50%;
                 height:10%;
             }
@@ -122,31 +121,21 @@
             #correo{
                 position:relative;
                 top:10%;
-                left:5%;
-            }
-            #seguir{
-                position:relative;
-                top:10%;
-                left:5%;
+                left:75%;
             }
         </style>
-        <link href="../styles/teoria.css" rel="stylesheet" type="text/css"/>
     </head>
     <body onload="traePerfil();">
-		<div class="scontainer">
-			
-                    <img id="imgPerfil" name="imgPerfil" src=""  />
-                    <br />
-                    <br />
-                    <div id="nombre"  ><%=usr%></div><br/>
-                    <div id="correo" ></div><br />
-                    <div id="descripcion" >descripcion de la cuenta</div><br />
-                    <input id="seguir" name="seguir" type="button" value="Seguir"/><br />
-                    
-			
-		</div>
-		<%for(String part:src){ %>
-			<%=part%>
-		<%}%>
+        <div class="scontainer">
+            <p>
+		<img src="aquivalaimagen" width="150" height="150" align=left id="imgPerfil"/><div><%=usr%><br>descripcion de la cuenta<br>SEGUIR</div>
+            </p>
+	</div>
+        <%if(!post.getError().isEmpty()){%>
+            <%=post.getError()%>
+        <%}else{%>
+	<%for(String part:src){%>
+            <%=part%>
+	<%}}%>
     </body>
 </html>

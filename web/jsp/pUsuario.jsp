@@ -3,9 +3,12 @@
     HttpSession sesion=request.getSession();
     String scr="";
     String s=sesion.getAttribute("usuario").toString()==null?"":sesion.getAttribute("usuario").toString();
+	int bd = sesion.getAttribute("bd") == null ? 0 : Integer.parseInt(sesion.getAttribute("bd").toString());
+	int id = sesion.getAttribute("id") == null?0:Integer.parseInt(sesion.getAttribute("id").toString());
     if(s.equals(""))
         response.sendRedirect("../login");
-    
+    ldn.cInicio inicio = new ldn.cInicio(bd);
+	String src = inicio.traePostInicio(id);
  %>
 <!DOCTYPE html>
 <html>
@@ -14,7 +17,7 @@
         <title>Perfil de Usuario</title>
         <script src="../scripts/sweetalert.min.js" type="text/javascript"></script>
         <link href="../styles/sweetalert.css" rel="stylesheet" type="text/css"/>
-       
+       <link href="../styles/teoria.css" rel="stylesheet" type="text/css"/>
     <style>
         input[type="radio"] {
           display: none;
@@ -36,63 +39,12 @@
     </style>
     </head>
     <body>
-        <div id="todo">
-            <br/><br/>
-            <div id="cabecera">
-                <table>
-                    <tr>
-                        <td>
-                            <img id="fotoP" height="200" width="200" src="../imgs/twitter.png"/>
-                        </td>
-                        <td>
-                            <p>Nombre de la cuenta</p><br>
-                            <p>Descripción de la cuenta</p>
-                            <input type="button" id="follow" value="Seguir">
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div id="cuerpo">
-                <table>
-                    <tr>
-                        <td>
-                            <p>Publicación</p>
-                            <p>Descripción</p>
-                            <img height="300" width="300" src="../imgs/facebook.png"/>
-                        </td>
-                        <td>
-                            <p>Intereses</p>
-                            <table title="Intereses">
-                                <td>
-                                    <tr>
-                                    Interes1
-                                    </tr>
-                                    <tr>
-                                    Interes2
-                                    </tr>
-                                    <tr>
-                                    Interes3
-                                    </tr>
-                                </td>
-                            </table> <br/><br/>
-                            <input type="button" id="Descargar" value="Descargar" ><br/><br/> 
-                            <p class="cal">
-                                <input id="radio1" type="radio" name="stars" value="5">
-                                <label for="radio1">★</label>
-                                <input id="radio2" type="radio" name="stars" value="4">
-                                <label for="radio2">★</label>
-                                <input id="radio3" type="radio" name="stars" value="3">
-                                <label for="radio3">★</label>
-                                <input id="radio4" type="radio" name="stars" value="2">
-                                <label for="radio4">★</label>
-                                <input id="radio5" type="radio" name="stars" value="1">
-                                <label for="radio5">★</label>
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        saludar();
+        <%if(!inicio.getError().isEmpty()){%>
+			<textarea rows="50" cols="100" readonly><%=inicio.getError().replace("\n","<br>")%></textarea>
+		<%}else if(!src.isEmpty()){%>
+			<%=src%>
+		<%}else{%>
+			<div class="container"><center><p>ESTO PARECE UNA TIERRA ARIDA</p><p>Para mostrar post que ver en tu pagina de inicio, debes comenzar a seguir diferentes cuentas o agregar intereses a tu cuenta.</p></center></div>
+		<%}%>
     </body>
 </html>

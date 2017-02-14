@@ -73,7 +73,8 @@ public class post extends HttpServlet {
             String result = "";
             if(imagen != null && !imagen.getContentType().equals("application/octet-stream")){
                 String extension = FilenameUtils.getExtension(imagen.getSubmittedFileName());
-                result = Clases.Utilities.saveFile(imagen, "imagenPost", "imagen", "." + extension);
+                result = Clases.Utilities.saveFile(imagen, "img", "imagen", "." + extension);
+                        System.out.println(result);
                 if(result.startsWith("/")) result = post.registraContenidoP(Integer.toString(post.getIdP()),result,cabeceraA);
                 msg += "\n" + result;
             }
