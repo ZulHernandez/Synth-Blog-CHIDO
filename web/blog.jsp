@@ -40,7 +40,7 @@
         </style>
     </head>
     
-    <frameset id="pag"  rows=17%,*%,40px>
+    <frameset id="pag"  rows=130px,*%,40px>
         
         <frame id="head" name="head" src="head.jsp" scrolling ="no" frameborder="0" noresize />
         <frame id="body" name="body" src="jsp/pUsuario.jsp" scrolling="yes" frameborder="0" noresize />

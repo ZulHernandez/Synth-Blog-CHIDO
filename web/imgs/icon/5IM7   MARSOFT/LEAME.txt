@@ -1,0 +1,24 @@
+Instrucciones:
+
+En primera instancia se deben correr las bases de datos, a excepción de la base de datos synthP.sql.
+
+Una vez realizado esto se debe proceder a correr el proyecto web.
+
+Posteriormente se debe correr el proyecto "servidorSeguridad". 
+
+Y por último se debe correr la aplicación local.
+
+Este orden debe seguirse ya que la aplicación web requiere que el servidor de seguridad esté corriendo.
+
+La aplicación local puede iniciarse usando una cuenta, pero se aconseja que la primera vez se ingrese como invitado.
+
+En el caso de la aplicación web , al correrla, existe un usuario predeterminado :
+marsoft@gmail.com y la contraseña es marsoft.
+Esta es la cuenta de administrador, puede ser utilizada o bien puede generarse una propia.
+
+Nota:
+
+El archivo de audio synthMD.mid es una pista compuesta utilizando el programa que realizamos como proyecto este semestre.
+Es una muestra del potencial de la idea que estamos desarrollando y se ha anexado con el fin de que pueda escucharla 
+y de esa manera poder tener tangiblemente la esencia de nuestra idea de desarrollo.
+
