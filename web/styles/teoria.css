@@ -23,6 +23,16 @@ body{
     padding: 10px;
     border-radius: 7px;
 }
+.seguir{
+    background-color: white;
+    border-color: blue;
+    color: blue;
+}
+.seguido{
+    background-color: blue;
+    border-color: white;
+    color: white;
+}
 ::-webkit-scrollbar{
   width: 10px;
   background-color: transparent;
