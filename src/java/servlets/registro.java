@@ -88,8 +88,8 @@ public class registro extends HttpServlet {
                                         out.print(regis.mandaMailConfirm(correo,"Bienvenido a Synth BLOG!"));
                                     }
                                     else{
-                                        out.print("Registro fallido, intentalo más tarde"+res);
-                                        out.println(regis.getError());
+                                        out.print("Registro fallido D:, intentalo más tarde.\n"+res);
+                                        out.println("Código E: "+regis.getError());
                                     }
                                 }else
                                     out.println(validacion.getError());

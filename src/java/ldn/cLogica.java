@@ -38,7 +38,7 @@ public class cLogica {
         String registro="";
         ResultSet rsRegistro=null;
         try{
-            for(int i = 0; i < 4; i++){
+            
                 BD.cDatos sql=new BD.cDatos(0);
                 sql.conectar();
                 rsRegistro = sql.consulta("call _registraCuenta('"+nam+"','"+ape+"','"+us+
@@ -47,7 +47,7 @@ public class cLogica {
                     registro=rsRegistro.getString("msg");
                 }
                 sql.cierraConexion();
-            }
+            
         }catch(Exception e){
             this.error=e.getMessage();
         }

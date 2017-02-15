@@ -19,6 +19,11 @@
         <link href="../styles/sweetalert.css" rel="stylesheet" type="text/css"/>
        <link href="../styles/teoria.css" rel="stylesheet" type="text/css"/>
     <style>
+        body
+		{
+                        background:url("../img/fondomusica1.jpg ");
+			margin:0px;
+		}
         input[type="radio"] {
           display: none;
         }

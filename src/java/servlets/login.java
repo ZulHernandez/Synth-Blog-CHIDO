@@ -80,11 +80,17 @@ public class login extends HttpServlet {
                 String xUsr=credenciales.Encriptar(correo);
                 String xPsw=credenciales.Encriptar(contra);
                 String datos="1"+xUsr+"|"+xPsw;
-                if(credenciales.pedirClave(datos).length()>1){
+                String pase=credenciales.pedirClave(datos);
+                if(pase.equals("No activado")){
                     //System.out.println("Si llegó!");
-                    this.error=2;
+                    this.error=4;
                     processRequest(request,response);
-                }
+                }else
+                    if(pase.equals("No existe"))
+                    {
+                        this.error=2;
+                        processRequest(request,response);
+                    }
                 int bd = Integer.parseInt(base);
                 System.out.println(bd);
                 gatito = new ldn.cLogica(bd);
@@ -98,7 +104,7 @@ public class login extends HttpServlet {
                         processRequest(request, response);
                     }else{
                         if(id==404){
-                            this.error=4;
+                            this.error=2;
                             processRequest(request, response);
                         }else{
                             HttpSession ss = request.getSession();
@@ -129,7 +135,7 @@ public class login extends HttpServlet {
         if(this.error == 2){
             //no existe cuenta...
             message = "<div id=\"alerta\" name=\"alerta\" style=\"display: block; padding: 15px; background-color: rgba(232,27,38,0.5)\">" +
-                      "<center>CORREO O CONTRASEÑA INCORRECTOS.\n (Asegúrate de haber activado tu cuenta)</center>" +
+                      "<center>CORREO O CONTRASEÑA INCORRECTOS(No se encuentra la cuenta, revisa que hayas introducido bien tus datos).\n </center>" +
                       "</div>";
         }else
         if(this.error == 3){

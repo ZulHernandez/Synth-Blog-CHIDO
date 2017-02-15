@@ -27,11 +27,16 @@
                         $("#token").focus();
                     }else
                     {
+                        $("#datos").css("display","none");
+                        $("#loader").css("display","block");
+                        alert("Verificando...");
                          $.post(
                                 "../agregaDatos",
                             {tipoPeticion:"3",token:cad},
                              function(respuesta){
                                  alert(respuesta);
+                                 $("#datos").css("display","block");
+                                 $("#loader").css("display","none");
                              }
                          )
                     }
@@ -43,11 +48,69 @@
                 }
             }
         </script>
+        <style>
+           
+                body
+		{
+                        background:url("../img/fondomusica1.jpg ");
+			margin:0px;
+                    
+		}
+            #datos
+            {
+                width:50%;
+                height:70%;
+                position: relative;
+                left: 22%;
+                margin-top: 15%;
+               
+                    background-color: rgba(214,214,214,0.3);
+                    box-shadow: 0px 0px 20px #000000;
+                    border-radius:3px;
+                padding: 5%;
+            }
+            span
+            {
+                font-weight: bold;   
+            }
+            button
+            {
+                 width: 20%;
+                background-color: RGB(21,133,183);
+                color: white;
+                border-color: transparent;
+                -webkit-transition-duration: 0.2s; 
+                transition: all 0.2s;
+                display: inline-block;
+                cursor: pointer;
+            }
+            #loader{ 
+                    
+                    border: 16px solid #f3f3f3; 
+                    border-top: 16px solid #3498db; 
+                    border-radius: 50%;
+                    width: 120px;
+                    height:120px;
+                    animation: spin 2s linear infinite;
+                    position: relative;
+                    margin-top: 20%;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+                }
+        </style>
     </head>
     <body>
-        <h1>Bienvenido</h1>
-        Ingresa el token para activar tu cuenta:
-        <input type="text" id="token" name="token" placeholder="Escribe aqui tu token" /><br /><br />
-        <input type="button" id="cambia" name="cambia" value="Enviar" onclick="validaToken();"/>
+    <center><div id='loader' style="display: none" > </div></center>
+        <div id='datos'>
+            <span>Ingrese abajo el token.</span>
+            <br />
+            <br />
+            <input type="text" id="token" name="token" placeholder="Escribe aqui tu token" /><br /><br />
+            <button id="cambia" name="cambia"  onclick="validaToken();">Enviar</button>
+            <br />
+            <br />
+        </div>
     </body>
 </html>

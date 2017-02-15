@@ -87,14 +87,18 @@ public class cPost {
             gatito = sql.consulta("call _obtenPost('"+idC+"');");
             while(gatito.next()){
                 String row = "";
-                row += "<!--"+gatito.getString("idPost")+"--><div class=\"container\"><table border=\"5\" cellspacing=\"15\" width=\"100%\"><tr>";
-                row += "<td colspan=\"2\"><img id=\"lafoto\" src=\""+gatito.getString("foto")+"\" width=\"70\" height=\"70\">&nbsp;&nbsp;<h2>"+gatito.getString("usuario")+"&nbsp;"+gatito.getString("fecha")+" </h2></td>";
-                row += "</tr><tr><td><table border=\"5\" cellspacing=\"7\" width=\"100%\" style=\"background-color: white; color: black;\"><tr>";
-                row += "<td>Publicacion<br>"+(empty(gatito.getString("imagenpost")) ? "Aqui no hay imagen" : "<p><img src=\""+gatito.getString("imagenpost")+"\" width=\"150\" height=\"150\" ALIGN=LEFT>"+gatito.getString("cabeceraimagenpost")+"</p>")+"</td>";
-                row += "<td>"+gatito.getString("texto").replace("<","&lt;").replace(">","&gt;")+"</td></tr></table></td>";
-                row += "<td><p><h2>"+gatito.getString("titulo")+"</h2></p><br><p>Categoria: "+gatito.getString("interes")+"</p>"+(empty(gatito.getString("audiopost")) ? "Aqui no hay archivo para descargar" : "<p>" + gatito.getString("cabeceraaudiopost") + "</p><a href=\""+gatito.getString("audiopost")+" download=\""+FilenameUtils.getName(gatito.getString("cabeceraaudiopost"))+"\"><button>DESCARGA EL AUDIO</button></a>")+"</td>";
-                row += "</tr>";
-                row += "</table></div>";
+                row += "<div class=\"container\" data-regPost="+gatito.getString("idPost")+" >";
+                row+="<span id='spName'>"+gatito.getString("usuario")+"</span><br />";
+                row+="<span id='spDate'>"+gatito.getString("fecha")+"</span><br />";
+                row += "<img id=\"imgUsr\" src=\""+gatito.getString("foto")+" \"><br />";
+                
+                
+                row+="<span id='spTit' >Tit:"+gatito.getString("titulo")+"</span><br /><br /><span id='spCateg'>Categoria: "+gatito.getString("interes")+"</span>";
+                row += (empty(gatito.getString("imagenpost")) ? "<img id='imgPost' />" : "<img id='imgPost' src=\""+gatito.getString("imagenpost")+"\"><br /><span id='cabImg' >Cab:"+gatito.getString("cabeceraimagenpost")+"</span>");
+                row += "<span id='contPost'>"+gatito.getString("texto").replace("<","&lt;").replace(">","&gt;")+"</span><br />";
+               
+                row += (empty(gatito.getString("audiopost")) ? "<span id='cabAudio'>a</span>" : "<span id='cabAudio' >" + gatito.getString("cabeceraaudiopost") + "</span><a id='audio' href=\""+gatito.getString("audiopost")+" download=\""+FilenameUtils.getName(gatito.getString("cabeceraaudiopost"))+"\"><button>Descargar</button></a>");
+                row +="</div><br /><br />";
                 src.add(row);
             }
         }catch(Exception e){

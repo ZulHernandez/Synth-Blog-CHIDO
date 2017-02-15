@@ -112,20 +112,51 @@
             }
         </script>
     <style>
-        
+      body{
+          background:url("../img/fondomusica1.jpg ");
+            margin:0px;
+      }
         .mdl-textfield,.mdl-js-textfield, .mdl-textfield--floating-label, .mdl-textfield__input, .mdl-textfield__label
         {
             /*color: white;*/
             border-color: white;
             border-width: 2px;
         }
+        #datosP2
+        {
+            position: absolute;
+            left: 50%;
+            top:0%;
+            margin-top: 5%;
+            width:30%;
+            height:60%;
+            
+            padding: 2%;
+            background-color: rgba(214,214,214,0.6);
+                   
+                    border-radius:3px;
+        }
+        #datosP1
+        {
+           
+            position:absolute;
+            width:30%;
+            height:60%;
+            top:0%;
+            margin-top: 5%;
+            left:16%;
+            padding: 2%;
+            background-color: rgba(214,214,214,0.6);
+            
+                    border-radius:3px;
+        }
         
     </style>
     </head>
     <body onload="traeIntereses();">
         <!--<form id="datosCta" name="datosCta" method="post" action="../cambiaDatos">-->
-        <div id="container" name="container">
-       <!-- <div id="datosP1" name="datosP1">-->
+        
+       <div id="datosP1" >
                     Nombre de usuario:<br /> <input id="usr" name="usr" class="mdl-textfield__input" type="text" placeholder="Nombre de usuario..."/>
                         <input type="button" value="Cambiar>" onclick="datoModif(1);"/><br/>
                     
@@ -142,8 +173,8 @@
                     Descripcion:<br />
                     <textarea id="descrip" class="mdl-textfield__input" name="descrip" rows="4" cols="50"></textarea><br />
                     <input type="button" value="Cambiar>" onclick="datoModif(5);"  /><br /><br />
-       <!-- </div>-->
-        <!--<div id="datosP2" name="datosP2">-->
+       </div>
+        <div id="datosP2" >
                 <form id="imgPefil" name="imgPerfil" method="post" action="../agregaImg" enctype="multipart/form-data">
                     
                             Foto de perfil:<br />
@@ -155,7 +186,6 @@
                    
 
                </form>
-       <!-- </div>-->
-        </div>
+       </div>
     </body>
 </html>

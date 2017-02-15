@@ -56,7 +56,7 @@ public class post extends HttpServlet {
             }
             if(audio != null && !audio.getContentType().equals("application/octet-stream")){
                 cabeceraA = request.getParameter("cabeceraA") == null ? "" : request.getParameter("cabeceraA");
-                if(cabeceraI.equals(""))throw new Exception("tu audio no tiene titulo. Agregale uno antes de enviar los datos");
+                if(cabeceraA.equals(""))throw new Exception("tu audio no tiene titulo. Agregale uno antes de enviar los datos");
             }
             
             HttpSession ss = request.getSession();

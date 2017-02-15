@@ -202,7 +202,7 @@
                             {tipoPeticion:5,paramBsq:textoBsq},
                             function(respuesta)
                             {
-                                alert(respuesta);
+                               
                                respuesta=$.parseJSON(respuesta);
                                totalCiclos=respuesta.total;
                                if(totalCiclos==null || totalCiclos=='')
@@ -217,7 +217,7 @@
                                    $("#rsUsrs").html(respuesta.Usuarios);
                                    $("#rsArtcs").html(respuesta.Articulos);
                                    $("#rsTodos").html(totalCiclos);
-                                   alert(totalCiclos);
+                                   alert("Busqueda realizada");
                                    for(var i=0;i<totalCiclos;i++)
                                    {
                                        tipoFila=respuesta.tipos[i]=='Usuario'?1:2;

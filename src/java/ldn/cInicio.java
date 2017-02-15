@@ -42,7 +42,7 @@ public class cInicio {
                                 src += "<span id='spTxt'>"+gatito.getString("texto")+"</span>";
                                 if(!reformat(gatito.getString("imagenpost")).isEmpty())src += "<div class=\"apart\"><img width=10% height=10% src=\""+gatito.getString("imagenpost")+"\"><br /><span id='spCab'>"+gatito.getString("cabeceraimagenpost")+"</span></div>";
                                 
-                                if(!reformat(gatito.getString("audiopost")).isEmpty())src += "<div class=\"apart\"><a id='audio' href=\""+gatito.getString("audiopost")+"\" download=\""+FilenameUtils.getName(gatito.getString("audiopost"))+"\"><button id='cabAudio'>"+gatito.getString("cabeceraaudiopost")+"</button></div>";
+                                if(!reformat(gatito.getString("audiopost")).isEmpty())src += "<div class=\"apart\"><a id='audio' href=\""+gatito.getString("audiopost")+"\" download=\""+FilenameUtils.getName(gatito.getString("audiopost"))+"\"><button id='cabAudio'>"+gatito.getString("cabeceraaudiopost")+"</button></a></div>";
                                 src += "<button id=\"boto\">Seguir</button>";
                                 src += "</div></div><br /><br />";
             }

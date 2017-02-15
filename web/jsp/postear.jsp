@@ -63,7 +63,7 @@
                 var cabeceraA = document.getElementById("cabeceraA").value;
                 if(titulo == "" || descripcion == "" || categoria == ""){
                     //swal({title: 'ERROR',text: 'Los campos no pueden ser vacios. Por favor, llenalos',type: 'error',showConfirmButton: true, html: false});
-                    alert("error");
+                    alert("Los campos de título, descripción y categoría deben ser llenados obligatoriamente.");
                 }else{
                     var data = new FormData();
                     jQuery.each(jQuery('#contenido')[0].files, function(i, file) {
@@ -72,6 +72,7 @@
                     jQuery.each(jQuery('#audio')[0].files, function(i, file) {
                         data.append('audio', file);
                     });
+                    
                     data.append('tipo','0');
                     data.append('titulo',titulo);
                     data.append('descripcion',descripcion);
@@ -127,14 +128,18 @@
             .selection:pressed{
                 background-color: white;
             }
+           table
+           {
+               background-color: purple;
+           }
         </style>
     </head>
     <body><form id="formaso" name="formaso" action="../post" method="post" enctype="multipart/form-data">
-        <table  cellspacing="10" width="100%" height="80%">
-            <tr><td>
-            <div id="micha1" class="container" height="100%">
+        <table  width="100%" >
+            <tr><td height="100%">
+            <div id="micha1" class="container" >
                 <center>
-                    <table  cellspacing="10">
+                    <table  >
                         <tr>
                             <td>Titulo:</td>
                             <td><input type="text" id="titulo" name="titulo" placeholder="Titulo del post"></td>
@@ -156,7 +161,7 @@
                 </center>
             </div></td>
             <td width="60%"><div id="micha2" class="container" height="100%">
-                <table cellspacing="10" width="100%" height="100%">
+                <table  width="100%" height="100%">
                     <tr>
                         <td valign="middle" align="center" width="40%">
                             <img src="/Synth_BLOG/img/Corchea.jpg" id="preview" name="preview"  width="150" height="150" ><br />
