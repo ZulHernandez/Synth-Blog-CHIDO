@@ -102,6 +102,8 @@ public class cDatos {private final int MYSQL = 0;
     //Metodos para ejecutar sentencias SQL
     public ResultSet consulta(String consulta) throws SQLException {
         this.estancia = (Statement) conn.createStatement();
+        consulta=consulta.replace("'","''").replace("<","&lt;").replace(">", "&gt;");
+        
         //sql server no utiliza call por eso hacemos un replace para el call y ()
         if(this.suich == SQLSERVER){
             consulta = consulta.replace("call", "").replace("(", "").replace(")", "");

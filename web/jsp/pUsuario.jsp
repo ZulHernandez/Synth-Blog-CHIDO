@@ -21,9 +21,9 @@
        <script type="text/javascript">
            function seguir(idss,boton){
                if(boton.innerHTML == "Seguir"){
-                   boton.innerHTML == "Seguido";
+                   boton.innerHTML = "Seguido";
                }else{
-                   boton.innerHTML == "Seguir";
+                   boton.innerHTML = "Seguir";
                }
                jQuery.ajax({
                     url:"../seguir",
