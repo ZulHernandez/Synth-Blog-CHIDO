@@ -103,7 +103,6 @@ begin
 	select * from intereses;
 end gatito
 delimiter ;
-call _obtenCategorías();
 
 drop procedure if exists _obtenTeoria;
 delimiter gatito
@@ -141,7 +140,6 @@ begin
     select idInteres as Interes,descripion as Genero from intereses;
 end **
 delimiter ;
-call _obtenIntereses();
 
 drop procedure if exists _validaRecuperacion;
 delimiter **
@@ -343,22 +341,20 @@ declare msj nvarchar(50);
 end **
 delimiter ;
 
+#Editado por: Daniel
 drop procedure if exists _registraSeguidor;
 delimiter **
-create procedure _registraSeguidor(in id1 int, in id2 int)
+create procedure _registraSeguidor(in id int, in ids int)
 begin
 	declare existe int;
     declare idI int;
-    declare msj nvarchar(50);
-	set existe = (select count(*) from relSeguidorCuenta where idSeguidor = id1 and idCuenta =  id2);
+	set existe = (select count(*) from relSeguidorCuenta where idSeguidor = ids and idCuenta =  id);
     if existe = 1 then
-		set msj =  'Registio existente.';
+		delete from relseguidorcuenta where idCuenta = id and idSeguidor = ids;
 	else
 		set idI = (select ifnull(max(idRel),0) + 1 from relSeguidorCuenta);
-		insert into relSeguidorCuenta values(idI,id1,id2);
-        set msj = 'Registro ejecutado.';
+		insert into relSeguidorCuenta values(idI,ids,id);
 	end if;
-    select msj; 
 end **
 delimiter ;
 
@@ -380,8 +376,6 @@ end if;
 	select msj,idT;
 end** 
 delimiter ; 
-
-call _subirTeoria('asdasd','asdasd','asdasd');
 
 drop procedure if exists _eliminarTeoria** 
 delimiter **
@@ -509,7 +503,6 @@ begin
 end **
 delimiter ;
 
-call _buscar('R');
 /*drop procedure if exists _buscarPorInteres;
 delimiter **
 create procedure _buscarPorInteres(in paramBsq nvarchar(100))
@@ -524,8 +517,64 @@ begin
         select msj as Resultado;
     end if;
 end **
+delimiter ;*/
+
+#Agregado por: Daniel
+drop view if exists vwpost;
+create view vwpost as 
+select cuenta.idCuenta, cuenta.usuario, cuenta.foto, post.idPost, post.idInteres, intereses.descripion as interes, post.titulo, post.texto, post.fecha,
+(select contenidop.contenido from contenidop where contenidop.idPost = post.idPost and contenidop.contenido like '%imagen%') as imagenpost,
+(select contenidop.cabeceraC from contenidop where contenidop.idPost = post.idPost and contenidop.contenido like '%imagen%') as cabeceraimagenpost,
+(select contenidop.contenido from contenidop where contenidop.idPost = post.idPost and contenidop.contenido like '%audio%') as audiopost,
+(select contenidop.cabeceraC from contenidop where contenidop.idPost = post.idPost and contenidop.contenido like '%audio%') as cabeceraaudiopost
+from cuenta inner join post on cuenta.idCuenta = post.idCuenta
+inner join intereses on post.idInteres = intereses.idInteres;
+
+#Agregado por: Daniel
+drop procedure if exists _obtenPost;
+delimiter gatito
+create procedure _obtenPost(in idC int)
+begin
+	select * from vwpost where vwpost.idCuenta = idC;
+end gatito
 delimiter ;
-call _buscarPorInteres('Musica Clasica');*/
+
+#Agregado por: Daniel
+drop procedure if exists _traePostInicio;
+delimiter qwe
+create procedure _traePostInicio(in id int)
+begin
+	declare stmtSeguidores nvarchar(1000);
+    declare stmtIntereses nvarchar(1000);
+	set @resultquery = null;
+    set stmtSeguidores = (select group_concat(concat('select * from vwpost where vwpost.idCuenta = ',relSeguidorCuenta.idCuenta) separator '\r\nUNION\r\n') from relseguidorcuenta where relseguidorcuenta.idSeguidor = id);
+    set stmtIntereses = (select group_concat(concat('select * from vwpost where vwpost.idInteres = ',relInteresCuenta.idInteres) separator '\r\nUNION\r\n') from relInteresCuenta where relInteresCuenta.idCuenta = id);
+    if(stmtSeguidores = '' or stmtSeguidores is null) then
+		if(stmtIntereses = '' or stmtIntereses is null)then
+			select 'select * from vwpost where vwpost.idCuenta = 0' into @resultquery;
+        else
+			select stmtIntereses into @resultquery;
+        end if;
+    else
+		if(stmtIntereses = '' or stmtIntereses is null) then
+			select stmtSeguidores into @resultquery;
+        else
+			select concat(stmtSeguidores,'\r\nUNION\r\n',stmtIntereses) into @resultquery;
+        end if;
+    end if;
+	prepare stmt from @resultquery;
+    execute stmt;
+end qwe
+delimiter ;
+
+#Agregado por: Daniel
+drop procedure if exists _obtenListaSeguidos;
+delimiter qwe
+create procedure _obtenListaSeguidos(in id int)
+begin
+	select idCuenta from relseguidorcuenta where idSeguidor = id;
+end qwe
+delimiter ;
 
 INsert INto intereses values(1,'Rock and Roll');
 INsert INto intereses values(2,'Pop');
@@ -602,10 +651,5 @@ INSERT INTO cuenta VALUES(1,1,
 							'correoR5@gmail.com',
 							'Descropcion user 5',
 							'/Synth_BLOG/img/fondomusica1.jpg');
-select * from cuenta;
-select * from intereses;
-select * from teoria;
-select * from relinterescuenta;
 #Linea modificada
 insert into relinterescuenta values(1,1,1),(2,1,3),(3,2,2),(4,2,4),(5,3,7),(6,2,7);
-call _traePerfil(1);

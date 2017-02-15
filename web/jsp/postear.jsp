@@ -97,6 +97,7 @@
                                 document.getElementById("enviar").value = "ENVIAR";
                             }else{
                                 alert(respuesta);
+                                window.location = "perfil.jsp";
                                 /*swal({
                                     title: "EXCELENTE",
                                     text: "Tu post ha sido publicado. dirigete a tu perfil para verlo!",
