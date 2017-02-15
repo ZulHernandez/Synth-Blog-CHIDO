@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     HttpSession sesion=request.getSession();
-    String scr="";
     String s=sesion.getAttribute("usuario").toString()==null?"":sesion.getAttribute("usuario").toString();
 	int bd = sesion.getAttribute("bd") == null ? 0 : Integer.parseInt(sesion.getAttribute("bd").toString());
 	int id = sesion.getAttribute("id") == null?0:Integer.parseInt(sesion.getAttribute("id").toString());
@@ -15,9 +14,45 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Perfil de Usuario</title>
+        <script src="../scripts/jquery-3.1.0.min.js" type="text/javascript"></script>
         <script src="../scripts/sweetalert.min.js" type="text/javascript"></script>
         <link href="../styles/sweetalert.css" rel="stylesheet" type="text/css"/>
        <link href="../styles/teoria.css" rel="stylesheet" type="text/css"/>
+       <script type="text/javascript">
+           function seguir(idss,boton){
+               if(boton.innerHTML == "Seguir"){
+                   boton.innerHTML == "Seguido";
+               }else{
+                   boton.innerHTML == "Seguir";
+               }
+               jQuery.ajax({
+                    url:"../seguir",
+                    type:"POST",
+                    data: {id:<%=id%>,ids:idss,bd:<%=bd%>},
+                    success: function(respuesta){
+                            alert(respuesta);
+                            /*swal({
+                                title: "EXCELENTE",
+                                text: "Tu post ha sido publicado. dirigete a tu perfil para verlo!",
+                                type: "successs",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "IR ALLA",
+                                cancelButtonText: "SEGUIR POSTEANDO",
+                                closeOnConfirm: true,
+                                closeOnCancel: true
+                              },
+                              function(isConfirm){
+                                if (isConfirm) {
+                                    window.location = "perfil.jsp";
+                                } else {
+                                    window.location = "postear.jsp";
+                                }
+                              });*/
+                    }
+                });
+           }
+       </script>
     <style>
         body
 		{
