@@ -357,7 +357,7 @@ begin
 	end if;
 end **
 delimiter ;
-
+select * from relseguidorcuenta;
 drop procedure if exists _subirTeoria;
 delimiter **
 create procedure _subirTeoria(in title nvarchar(100), in des nvarchar(300), in body nvarchar(500))
@@ -406,7 +406,7 @@ if (suich = 1) then
 	set msj =  'Registro de contenido exitoso.';
 else 
 	if(suich = 2) then
-		set idI = (select ifnull(max(idContenido), 0) + 1 from contenidoP);
+		set idI = (select ifnull(max(idContenidoP), 0) + 1 from contenidoP);
 		insert into contenidoP values(idI,idteo,cont,cabe);
 		set msj =  'Registro de contenido exitoso.';
     else
@@ -445,7 +445,7 @@ declare idP int;
 declare msj nvarchar(50);
 set existe =  (select count(*) from post where idCuenta=idC and titulo = title);
 if(existe = 1) then 
-	set msj = 'Registro existente.'; 
+	set msj = 'Ya existe un post con el mismo titulo'; 
     set idP = -1;
 else 
 	set idP = (select ifnull(max(idPost),0)+1 from post); 
@@ -535,7 +535,7 @@ drop procedure if exists _obtenPost;
 delimiter gatito
 create procedure _obtenPost(in idC int)
 begin
-	select * from vwpost where vwpost.idCuenta = idC;
+	select * from vwpost where vwpost.idCuenta = idC order by fecha desc,idPost desc;
 end gatito
 delimiter ;
 

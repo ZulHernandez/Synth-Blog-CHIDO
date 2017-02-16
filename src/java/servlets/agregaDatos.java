@@ -6,7 +6,6 @@
 package servlets;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,7 +53,6 @@ public class agregaDatos extends HttpServlet {
              int bd=Integer.parseInt(sesion.getAttribute("bd").toString());
              ldn.cLogica trae=new ldn.cLogica(bd);
              Clases.cCifrado cred=new Clases.cCifrado();
-             Gson s=new Gson();
                 //valor asignado por default, debe traerse el valor desde 
              //la sesion
              if(tipoPeticion.equals("0"))

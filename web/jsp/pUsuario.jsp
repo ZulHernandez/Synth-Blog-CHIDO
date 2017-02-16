@@ -22,33 +22,44 @@
            function seguir(idss,boton){
                if(boton.innerHTML == "Seguir"){
                    boton.innerHTML = "Seguido";
+                   boton.className = "seguido";
                }else{
                    boton.innerHTML = "Seguir";
+                   boton.className = "seguir";
                }
                jQuery.ajax({
                     url:"../seguir",
                     type:"POST",
                     data: {id:<%=id%>,ids:idss,bd:<%=bd%>},
                     success: function(respuesta){
-                            alert(respuesta);
-                            /*swal({
-                                title: "EXCELENTE",
-                                text: "Tu post ha sido publicado. dirigete a tu perfil para verlo!",
-                                type: "successs",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "IR ALLA",
-                                cancelButtonText: "SEGUIR POSTEANDO",
-                                closeOnConfirm: true,
-                                closeOnCancel: true
-                              },
-                              function(isConfirm){
-                                if (isConfirm) {
-                                    window.location = "perfil.jsp";
-                                } else {
-                                    window.location = "postear.jsp";
-                                }
-                              });*/
+                        var resp = JSON.parse(respuesta);
+                        var typ,tit;
+                        switch(resp.status){
+                            case "ERROR":
+                                typ = "error";
+                                tit = "Ops...";
+                                boton.innerHTML = "Seguir";
+                                boton.className = "seguir";
+                                break;
+                            case "WARNING":
+                                typ = "error";
+                                tit = "Error";
+                                boton.innerHTML = "Seguir";
+                                boton.className = "seguir";
+                                break;
+                        }
+                        alert(resp.status);
+                        if(respuesta.status != "OK")swal({
+                            title: tit,
+                            text: resp.msg,
+                            type: typ,
+                            showCancelButton: false,
+                            showConfirmButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "ENTENDIDO",
+                            closeOnConfirm: true,
+                            closeOnCancel: true
+                        });
                     }
                 });
            }

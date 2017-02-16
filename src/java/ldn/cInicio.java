@@ -46,7 +46,7 @@ public class cInicio {
                                 
                                 if(!reformat(gatito.getString("audiopost")).isEmpty())src += "<div class=\"apart\"><a id='audio' href=\""+gatito.getString("audiopost")+"\" download=\""+FilenameUtils.getName(gatito.getString("audiopost"))+"\"><button id='cabAudio'>"+gatito.getString("cabeceraaudiopost")+"</button></div>";
                                 if(esSeguido(id, gatito.getInt("idCuenta")))src += "<button class=\"seguido\" onclick=\"seguir("+gatito.getString("idCuenta")+",this);\">Seguido</button>";
-                                else src += "<button onclick=\"seguir("+gatito.getString("idCuenta")+",this);\" class=\"seguir\">Seguir</button>";
+                                else src += "<br><br><button onclick=\"seguir("+gatito.getString("idCuenta")+",this);\" class=\"seguir\">Seguir</button>";
                                 src += "</div></div><br /><br />";
             }
         }catch(Exception e){
