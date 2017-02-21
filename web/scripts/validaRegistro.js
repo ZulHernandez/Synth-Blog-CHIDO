@@ -124,7 +124,7 @@ function traeCampo(numCampo){
             campo="mail";
             break;
         case 4:
-            campo="intereses";
+            campo="interesesCuenta";
             break;
         case 5:
             campo="descrip";
@@ -137,19 +137,37 @@ function traeCampo(numCampo){
 }
 function datoModif(numDato){
     var elemento=traeCampo(numDato);
+    var valor='';
     if(numDato==6)
         document.getElementById(elemento).value=document.getElementById("nuevaImg").files[0].name;
-  
-    var valor=document.getElementById(elemento).value;
-    if(valor==''||valor==' ')
+    if(numDato==4)
     {
-        alert('Llena el valor');
-        if(numDato==6)
-            document.getElementById("nuevaImg").focus();
-        else
-            document.getElementById(elemento).focus();
-    }else
-        validarNvoDato(numDato,valor);
+       var jsonIntereses='';
+        $.each($("#interesesCuenta").find("button"),function(key,value){
+            if(this.dataset.tipo=='perfil')
+                valor.push(this.dataset.regis);
+            else
+            {
+                traeIntereses();
+                alert("Error:Tipo de interés incorrecto, vuelve a agregar tus intereses.");
+            }
+        });
+        jsonIntereses.push({"Intereses":valor});
+        validarNvoDato(numDato,jsonIntereses);
+    }
+    else
+    {
+        valor=document.getElementById(elemento).value;
+        if(valor==''||valor==' ')
+        {
+            alert('Llena el valor');
+            if(numDato==6)
+                document.getElementById("nuevaImg").focus();
+            else
+                document.getElementById(elemento).focus();
+        }else
+            validarNvoDato(numDato,valor);
+    }
    
 }
 function validarNvoDato(dato,eleme)
@@ -200,7 +218,7 @@ function validarNvoDato(dato,eleme)
             var s=confirm("¿Seguro que quieres modificar?");
             if(s){
             
-                    modifInfo(elemento,dato);
+                   insertarClave('Confirma tu contraseña por favor.',elemento,dato);
                 }else
                 {
                     document.getElementById(campo).value="";
@@ -254,11 +272,8 @@ function validacion(){
                                 else
                                     pasa=!tieneEspeciales(Elementos[i].value);
                                 break;
-                            case 3:
+                            case 3,4:
                                 pasa=!tieneEspeciales(Elementos[i].value);
-                                break;
-                            case 4:
-                                    pasa=!tieneEspeciales(Elementos[i].value);
                                 break;
                             case 5:
                                 pasa=validoCorreo(Elementos[i].value);

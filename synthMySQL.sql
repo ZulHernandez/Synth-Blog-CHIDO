@@ -104,6 +104,14 @@ begin
 end gatito
 delimiter ;
 
+drop procedure if exists _interesesUsr;
+delimiter **
+create procedure _interesesUsr(in ide int(3))
+begin
+	select relinterescuenta.idInteres as registro,descripion as genero from relinterescuenta  inner join intereses on relinterescuenta.idInteres=intereses.idInteres and idCuenta=ide;
+end **
+delimiter ;
+
 drop procedure if exists _obtenTeoria;
 delimiter gatito
 create procedure _obtenTeoria(in idT int(3))
@@ -272,7 +280,7 @@ declare intere nvarchar(60);
 declare msj nvarchar(50);
 set existe = (select count(*) from cuenta where idCuenta=id and clave=contra);
    if existe = 0 then 
-		set msj = 'Datos incorrectos o contrasenia erronea.';
+		set msj = 'Error: Clave incorrecta.';
    else
 	if tipoModif=1 then
 			update cuenta set usuario=dato where idCuenta=id;
@@ -310,7 +318,7 @@ set existe = (select count(*) from cuenta where idCuenta=id and clave=contra);
 						update cuenta set foto=dato where idCuenta=id;
 						set msj='Foto modificada';
                     else
-                     set msj='Modifificacion no disponible';
+                     set msj='Error: Modifificacion no disponible';
                      end if;
 					end if;
                 end if;
@@ -348,15 +356,20 @@ create procedure _registraSeguidor(in id int, in ids int)
 begin
 	declare existe int;
     declare idI int;
+    declare msj nvarchar(60);
 	set existe = (select count(*) from relSeguidorCuenta where idSeguidor = ids and idCuenta =  id);
     if existe = 1 then
 		delete from relseguidorcuenta where idCuenta = id and idSeguidor = ids;
+        set msj='Seguir';
 	else
 		set idI = (select ifnull(max(idRel),0) + 1 from relSeguidorCuenta);
 		insert into relSeguidorCuenta values(idI,ids,id);
+        set msj='Siguiendo';
 	end if;
+    select msj as estado;
 end **
 delimiter ;
+
 
 drop procedure if exists _subirTeoria;
 delimiter **
@@ -406,7 +419,7 @@ if (suich = 1) then
 	set msj =  'Registro de contenido exitoso.';
 else 
 	if(suich = 2) then
-		set idI = (select ifnull(max(idContenido), 0) + 1 from contenidoP);
+		set idI = (select ifnull(max(idContenidoP), 0) + 1 from contenidoP);
 		insert into contenidoP values(idI,idteo,cont,cabe);
 		set msj =  'Registro de contenido exitoso.';
     else
@@ -539,6 +552,8 @@ begin
 end gatito
 delimiter ;
 
+
+
 #Agregado por: Daniel
 drop procedure if exists _traePostInicio;
 delimiter qwe
@@ -576,6 +591,24 @@ begin
 end qwe
 delimiter ;
 
+
+drop procedure if exists _seSiguen;
+delimiter **
+create procedure _seSiguen(in followed int, in follower int)
+begin
+	declare msj nvarchar(60);
+    declare enSeguimiento int(1);
+    set enSeguimiento=(select count(*) from relseguidorcuenta where idSeguidor=followed and idCuenta=follower);
+    if enSeguimiento = 0 then
+		set msj='No se siguen';
+	else 
+		set msj='Si se siguen';
+	end if;
+select msj as seguimiento;
+end **
+delimiter ;
+select * from relinterescuenta;
+select * from intereses;
 INsert INto intereses values(1,'Rock and Roll');
 INsert INto intereses values(2,'Pop');
 INsert INto intereses values(3,'Rap');
@@ -652,4 +685,9 @@ INSERT INTO cuenta VALUES(1,1,
 							'Descropcion user 5',
 							'/Synth_BLOG/img/fondomusica1.jpg');
 #Linea modificada
-insert into relinterescuenta values(1,1,1),(2,1,3),(3,2,2),(4,2,4),(5,3,7),(6,2,7);
+insert into relinterescuenta values(1,1,1),(2,1,3),(3,2,2),(4,2,4),(6,2,7);
+select * from relinterescuenta;
+select * from post;
+select * from contenidop;
+select * from vwpost;
+select * from relseguidorcuenta;

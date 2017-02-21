@@ -94,10 +94,10 @@ public class cPost {
                 
                 
                 row+="<span id='spTit' >Tit:"+gatito.getString("titulo")+"</span><br /><br /><span id='spCateg'>Categoria: "+gatito.getString("interes")+"</span>";
-                row += (empty(gatito.getString("imagenpost")) ? "<img id='imgPost' />" : "<img id='imgPost' src=\""+gatito.getString("imagenpost")+"\"><br /><span id='cabImg' >Cab:"+gatito.getString("cabeceraimagenpost")+"</span>");
+                row += (empty(gatito.getString("imagenpost")) ? "" : "<img id='imgPost' src=\""+gatito.getString("imagenpost")+"\"><br /><span id='cabImg' >Cab:"+gatito.getString("cabeceraimagenpost")+"</span>");
                 row += "<span id='contPost'>"+gatito.getString("texto").replace("<","&lt;").replace(">","&gt;")+"</span><br />";
                
-                row += (empty(gatito.getString("audiopost")) ? "<span id='cabAudio'>a</span>" : "<span id='cabAudio' >" + gatito.getString("cabeceraaudiopost") + "</span><a id='audio' href=\""+gatito.getString("audiopost")+" download=\""+FilenameUtils.getName(gatito.getString("cabeceraaudiopost"))+"\"><button>Descargar</button></a>");
+                row += (empty(gatito.getString("audiopost")) ? "" : "<span id='cabAudio' >" + gatito.getString("cabeceraaudiopost") + "</span><a id='audio' href='"+gatito.getString("audiopost")+"' download='"+FilenameUtils.getName(gatito.getString("cabeceraaudiopost"))+"'><button>Descargar</button></a>");
                 row +="</div><br /><br />";
                 src.add(row);
             }

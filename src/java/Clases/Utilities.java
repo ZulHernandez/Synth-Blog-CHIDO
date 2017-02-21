@@ -33,6 +33,7 @@ public class Utilities {
             System.out.println("Aqui!");
             System.out.println(fimagen);
             rutaimagen = "/Synth_BLOG/"+folder+"/" + prefix + num + suffix;
+            System.out.println("rutaimagen");
             FileOutputStream outimagen = new FileOutputStream(fimagen);
             int dataimagen = isimagen.read();
             while(dataimagen != -1){

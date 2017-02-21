@@ -44,6 +44,8 @@ public class agregaDatos extends HttpServlet {
              String tipoPeticion=request.getParameter("tipoPeticion")==null?"":request.getParameter("tipoPeticion");
              //peticion 0 de consulta de intereses
              String idUsr=request.getParameter("user")==null?"":request.getParameter("user"); 
+             String visita=request.getParameter("visita")==null?"":request.getParameter("visita");
+             String visitante=request.getParameter("visitante")==null?"":request.getParameter("visitante");
              String clavUsr=request.getParameter("clavUsr")==null?"":request.getParameter("clavUsr"); 
              String nvoDato=request.getParameter("nvoDato")==null?"":request.getParameter("nvoDato");
              String tipo=request.getParameter("tipo")==null?"":request.getParameter("tipo");
@@ -61,7 +63,7 @@ public class agregaDatos extends HttpServlet {
              {
                  
                 
-                 respuesta=trae.getIntereses();
+                 respuesta=trae.getIntereses(idUsr);
                  out.print(respuesta);
              }else
                  if(tipoPeticion.equals("1") && !idUsr.equals(""))
@@ -124,9 +126,19 @@ public class agregaDatos extends HttpServlet {
                         {
                                 String data[]=new String[4];
 
-                                data=trae.traePerfil(idUsr,0);
+                                
                                 String values[]={"nombre","correo","descripcion","imgPerfil"};
+                                String disableSeguir="false";
+                                
+                                if(Boolean.valueOf(visita))
+                                {
+                                   data=trae.traePerfil(visitante,0);
+                                   if(trae.seSiguen(visitante,idUsr))
+                                        disableSeguir="true";
+                                }else
+                                    data=trae.traePerfil(idUsr,0);
                                 JsonObject jsPerfil=trae.perfilToJson(values,data);
+                                jsPerfil.addProperty("seguir",disableSeguir);
                                 //s.addAll(data);
                                 if(data[0].equals(""))
                                     out.print("Datos no encontrados");
@@ -137,7 +149,18 @@ public class agregaDatos extends HttpServlet {
                             {
                                 out.write(trae.busquedaGeneral(paramBsq));
                             }else
-                              response.sendRedirect("login");
+                                if(tipoPeticion.equals("6"))
+                                {
+                                    String estatusSeguimiento="";
+                                    if(Boolean.valueOf(visita))
+                                    {
+                                       //if(!trae.seSiguen(visitante,idUsr))
+                                        estatusSeguimiento=trae.seguirCuenta(idUsr, visitante);
+                                        out.write(estatusSeguimiento);
+                                           
+                                    }
+                                }else
+                                    response.sendRedirect("login");
            
         }
     }

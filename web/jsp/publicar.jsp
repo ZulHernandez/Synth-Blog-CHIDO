@@ -57,13 +57,65 @@
                 var str = document.getElementById("contenido").value;
                 document.getElementById("ext2").innerHTML = str;
             }
+            function compruebaDatos(datos,nombreDatos)
+            {
+                var error="";
+                if(datos.length!=nombreDatos.length)
+                {
+                    error="Cantidad de datos y nombres no coinciden";
+                }
+                else
+                {
+                    for(var i=0;i<datos.length;i++)
+                    {
+                        if(datos[i]==''|| datos[i]==null)
+                        {
+                            if(nombreDatos[i]=='Cabecera')
+                            {
+                                
+                                if($("#contenido").val()!='' && $("#contenido").val()!=null)
+                                {
+                                    error="Contenido vacío: Cabecera de imagen.\n";
+                                    error+="No puedes subir una imagen sin cabecera.";
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                error="Campo vacio: "+nombreDatos[i];
+                                break;
+                            }
+                                
+                        }
+                        else
+                        {
+                            if(nombreDatos[i]=='Cabecera')
+                            {
+                                if($("#contenido").val()=='' || $("#contenido").val()==null)
+                                {
+                                    error="Contenido vacío: Imagen.\n";
+                                    error+="No puedes subir una cabecera de imagen sin imagen.";
+                                    break;
+                                }
+                               
+                                
+                            }
+                           
+                        }
+                    };
+                    return error;
+                }
+            }
             function validarH(){
                 var titulo = document.getElementById("titulo").value;
                 var descripcion = document.getElementById("descripcion").value;
                 var cuerpo = document.getElementById("cuerpo").value;
                 var cabecera = document.getElementById("cabecera").value;
-                if(titulo == "" || descripcion == "" || cuerpo == ""){
-                    alert("DATOS VACIOS: por favor, llena los campos faltantes");
+                var datos=[titulo,descripcion,cuerpo,cabecera];
+                var nombreDatos=["Titulo","Descripción","Cuerpo","Cabecera"];
+                var estatusDatos=compruebaDatos(datos,nombreDatos);
+                if(estatusDatos.length!=0){
+                    alert(estatusDatos);
                 }else{
                     var data = new FormData();
                     jQuery.each(jQuery('#contenido')[0].files, function(i, file) {
@@ -85,7 +137,11 @@
                         type: 'POST',
                         success: function(respuesta){
                             alert(respuesta);
-                            window.location = "teoria.jsp";
+                            if(!respuesta.includes("Error"))
+                            {
+                                  window.location = "teoria.jsp";
+                            }
+                              
                         }
                     });
                 }
@@ -98,7 +154,8 @@
             border-color: white;
             border-width: 2px;
         }
-    </style></head>
+    </style>
+    </head>
     
     <body>
         <div class="container">

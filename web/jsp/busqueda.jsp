@@ -139,14 +139,23 @@
 
 
                 }
-                #msj
+                 .fondo
                 {
-                    
+                    display:none;
+                    z-index: 2;
+                    background-color: RGB(21,133,183);
+                    color: white;
+                    box-shadow: 0px 0px 20px #000000;
+                    border-radius:3px;
+                    padding: 1%;
+                    width:95%;
+                    height:81%;
                     position: absolute;
-                    top:0%;
-                    width:100%;
-                    height:100%;
-                    background-color: yellow;
+                    left:0%;
+                    top:10%;
+                    text-align: center;
+                    font-size: xx-large;
+                    font-weight: bold;
                     
                 }
                 #containerCarga
@@ -187,11 +196,24 @@
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
                 }
+               
 		</style>
                 <script src="../scripts/jquery-3.1.0.min.js" type="text/javascript"></script>
                 <script type="text/javascript">
+                    function verPerfil(btnCuenta)
+                    {
+                        var regis=btnCuenta.parentNode.parentNode.dataset.regis;
+                        window.location="perfil.jsp?usr="+regis;
+                    }
+                    function pegar404()
+                    {
+                        $("#resultadosBsq").append("<div id='msj' class='fondo'><span style='position:relative'>Lo sentimos, no se encontraron resultados :C</span> </div>");
+                        $.each($("#msj").find("span"),function(key,value){this.style.top="40%";});
+                        $("#msj").show("slow");
+                    }
                     function pedirResultado()
                     {
+                       
                        var textoBsq='<%=bsq%>';
                        var totalCiclos=0;
                        var tipoFila=0;
@@ -211,18 +233,19 @@
                                    $("#containerCarga").css("display","none");
                                    $("#filtrosBsq").css("display","block");
                                    $("#resultadosBsq").css("display","block");
+                                   pegar404();
                                }
                                else
                                {
                                    $("#rsUsrs").html(respuesta.Usuarios);
                                    $("#rsArtcs").html(respuesta.Articulos);
                                    $("#rsTodos").html(totalCiclos);
-                                   alert("Busqueda realizada");
+                                   
                                    for(var i=0;i<totalCiclos;i++)
                                    {
                                        tipoFila=respuesta.tipos[i]=='Usuario'?1:2;
                                        if(tipoFila==1)
-                                           btnConsulta="<button id='seguir' onclick='sigueUsr(this);'>Seguir</button>";
+                                           btnConsulta="<button id='ver' onclick='verPerfil(this)'>Ver perfil</button>";
                                        else       
                                            btnConsulta="<a id='urlArt' href='despliegaTeoria.jsp?idT="+respuesta.registros[i]+"' >Leer</a>";
                                    
@@ -255,35 +278,43 @@
                         switch(orden)
                         {   
                             case 1:
-                                if($("#rsUsrs").html()=='0')
+                                 $("#msj").remove();
+                                if($("#rsUsrs").html()=='0' || $("#rsUsrs").html()=='')
                                 {
-                                    $("#resultadosBsq").append('<center id="msj" >:( No se encontraron resultados</center>');
+                                    pegar404();
                                     $("div[data-tipoFila]").css("display","none");
                                 }
                                 else
                                 {
-                                    $("#msj").remove();
+                                    
                                     $("div[data-tipoFila='1']").css("display","block");
                                     $("div[data-tipoFila='2']").css("display","none");
                                  }
                                 break;
                             case 2:
-                                if($("#rsArtcs").html()=='0')
+                                 $("#msj").remove();
+                                if($("#rsArtcs").html()=='0'||$("#rsArtcs").html()=='')
                                 {
                                     $("div[data-tipoFila]").css("display","none");
-                                    $("#resultadosBsq").append('<center id="msj" >:( No se encontraron resultados</center>');
+                                    pegar404();
                                 }
                                 else
                                 {
-                                   $("#msj").remove();
+                                  
                                     $("div[data-tipoFila='2']").css("display","block");
                                     $("div[data-tipoFila='1']").css("display","none");
                                 }
                                 break;
                                 
                             case 3:
-                                $("#msj").remove();
-                                $("div[data-tipoFila]").css("display","block");
+                                 $("#msj").remove();
+                                if($("#rsTodos").html()==''||$("#rsTodos").html()=='0')
+                                    pegar404();
+                                else
+                                {
+                                   
+                                    $("div[data-tipoFila]").css("display","block");
+                                }
                                 break;
                         }
                     }
@@ -309,7 +340,7 @@
                     </div>
             </div>
             <div id="resultadosBsq">
-                <div id="msj" >:( No se encontraron resultados</div>
+               
             </div>
 	
 	</body>

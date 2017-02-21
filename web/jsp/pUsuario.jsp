@@ -19,39 +19,14 @@
         <link href="../styles/sweetalert.css" rel="stylesheet" type="text/css"/>
        <link href="../styles/teoria.css" rel="stylesheet" type="text/css"/>
        <script type="text/javascript">
-           function seguir(idss,boton){
-               if(boton.innerHTML == "Seguir"){
-                   boton.innerHTML == "Seguido";
-               }else{
-                   boton.innerHTML == "Seguir";
-               }
-               jQuery.ajax({
-                    url:"../seguir",
-                    type:"POST",
-                    data: {id:<%=id%>,ids:idss,bd:<%=bd%>},
-                    success: function(respuesta){
-                            alert(respuesta);
-                            /*swal({
-                                title: "EXCELENTE",
-                                text: "Tu post ha sido publicado. dirigete a tu perfil para verlo!",
-                                type: "successs",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "IR ALLA",
-                                cancelButtonText: "SEGUIR POSTEANDO",
-                                closeOnConfirm: true,
-                                closeOnCancel: true
-                              },
-                              function(isConfirm){
-                                if (isConfirm) {
-                                    window.location = "perfil.jsp";
-                                } else {
-                                    window.location = "postear.jsp";
-                                }
-                              });*/
+         
+               function verPerfil(btnCuenta)
+                    {
+                        var regis=btnCuenta.parentNode.parentNode.dataset.regis;
+                        alert(regis);
+                        window.location="perfil.jsp?usr="+regis;
                     }
-                });
-           }
+           
        </script>
     <style>
         body

@@ -65,16 +65,18 @@ public class teoria extends HttpServlet {
                     Part contenido = request.getPart("contenido");
                     String cabecera = request.getParameter("cabecera") == null ? "" : request.getParameter("cabecera");
                     //datos vacios = exception
-                    if(titulo.equals("") || descripcion.equals("") || cuerpo.equals("")) throw new Exception("Servlet teoria with empty values");
-                    if(!contenido.getContentType().equals("application/octet-stream") && cabecera.equals("")) throw new Exception("Ponle una cabecera a tu imagen.");
+                    if(titulo.equals("") || descripcion.equals("") || cuerpo.equals("")) throw new Exception("Titulo,Descripcion o cuerpo vacíos.");
+                    if(contenido==null && !cabecera.equals("")) throw new Exception("Para subir una cabecera debe subir una imagen también.");
+                    if(contenido!=null && cabecera.equals(""))throw new Exception("Para subir una imagen debe agregarle una cabecera");
+                    if(contenido !=null && contenido.getContentType().equals("application/octet-stream"))throw new Exception("Error: Formato de imagen incorrecto");
                     String msj = gatito.registraTeoria(titulo, descripcion, cuerpo);
                     //error al subir teoria = exception
                     if(msj.startsWith("at")) throw new Exception(msj);
                     String[] datas = msj.split("/");
-                    if(!contenido.getContentType().equals("application/octet-stream")){
+                    if(contenido !=null){
 
                         //no hay cabecera = no pierdas el tiempo
-                        if(cabecera.equals("")) throw new Exception("Servlet teoria with empty values");
+                        if(cabecera.equals("")) throw new Exception(" No se encuentra la cabecera de la imagen");
                         InputStream isimagen = contenido.getInputStream();
                         
                         URL rutaca = getClass().getProtectionDomain().getCodeSource().getLocation(); // traigo dirreccion
@@ -102,6 +104,7 @@ public class teoria extends HttpServlet {
                         isimagen.close();
                         outimagen.close();
                         msj = gatito.registraContenidoT(datas[1],rutaimagen,cabecera);
+                        System.out.println("BD: "+msj);
                         //error al registrar contenido = exception
                         if(!gatito.getError().equals("")) throw new Exception(gatito.getError());
                     }
@@ -110,7 +113,8 @@ public class teoria extends HttpServlet {
                 }else
                 if(peticion == -1) throw new Exception("Peticion incorrecta. Intentalo de nuevo");
             }catch(Exception e){
-                out.print("ERROR: " + e.getMessage());
+                System.out.println(e);
+                out.print("Error: " + e.getMessage());
             }
         }
     }

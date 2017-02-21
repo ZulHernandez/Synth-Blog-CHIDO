@@ -10,7 +10,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Synth!WebCommunity</title>
-    </head>
     <script src="../scripts/validaRegistro.js" type="text/javascript"></script>
     <script src="../css/sweetalert-master/dist/sweetalert.min.js" type="text/javascript"></script>
     <link href="../css/sweetalert-master/dist/sweetalert.css" rel="stylesheet" type="text/css"/>
@@ -311,6 +310,7 @@
 
         }
     </style>
+</head>
     <body onload="cargarImgSketch();">
         <div id="todo">
             <div id="cabeza">

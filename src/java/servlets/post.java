@@ -75,18 +75,19 @@ public class post extends HttpServlet {
                 String extension = FilenameUtils.getExtension(imagen.getSubmittedFileName());
                 result = Clases.Utilities.saveFile(imagen, "img", "imagen", "." + extension);
                         System.out.println(result);
-                if(result.startsWith("/")) result = post.registraContenidoP(Integer.toString(post.getIdP()),result,cabeceraA);
+                if(result.startsWith("/")) result = post.registraContenidoP(Integer.toString(post.getIdP()),result,cabeceraI);
                 msg += "\n" + result;
             }
             if(audio != null && !audio.getContentType().equals("application/octet-stream")){
                 String extension = FilenameUtils.getExtension(audio.getSubmittedFileName());
+                System.out.println(extension);
                 result = Clases.Utilities.saveFile(audio, "audioPost", "audio", "." + extension);
                 if(result.startsWith("/")) result = post.registraContenidoP(Integer.toString(post.getIdP()),result,cabeceraA);
                 msg += "\n" + result;
             }
             out.print(msg);
         }catch(Exception e){
-            out.print("ERROR: " + e.getMessage()+"D:");
+            out.print("ERROR: " + e.getMessage());
         }
     }
 

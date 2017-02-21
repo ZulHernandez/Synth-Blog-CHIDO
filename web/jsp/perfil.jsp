@@ -10,8 +10,15 @@
 	int bd = 0;
 	int usrId = 0;
 	String usr = "";
+        String usrVisita="n";
+        boolean visitante=false;
 	try{
-		usrId=sesion.getAttribute("id") == null?0:Integer.parseInt(sesion.getAttribute("id").toString());
+            usrId=sesion.getAttribute("id") == null?0:Integer.parseInt(sesion.getAttribute("id").toString());
+            usrVisita=request.getParameter("usr")== null || usrId==Integer.parseInt(request.getParameter("usr")) ?"no":request.getParameter("usr");
+            if(!usrVisita.equals("no"))
+            {        
+                visitante=true;
+            }
 		usr=sesion.getAttribute("usuario") == null?"":sesion.getAttribute("usuario").toString();
 		bd = sesion.getAttribute("bd") == null ? 0 : Integer.parseInt(sesion.getAttribute("bd").toString());
 		if(usrId == 0) throw new Exception("c:");
@@ -19,7 +26,7 @@
 		response.sendRedirect("../login");
 	}
 	ldn.cPost post = new ldn.cPost(bd);
-	String[] src = post.obtenPost(usrId);
+        String[] src = visitante==true? post.obtenPost(Integer.parseInt(usrVisita)):post.obtenPost(usrId);
 %>
 <!DOCTYPE html>
 <html>
@@ -31,10 +38,11 @@
             
             function traePerfil(){
                 $("#container").ready(
+                        
                         $.ajax({
                         url:"../agregaDatos",
                         type:"POST",
-                        data:{tipoPeticion:"4",user:<%=usrId%>},
+                        data:{tipoPeticion:"4",user:<%=usrId%>,visita:<%=visitante%>,visitante:'<%=usrVisita%>'},
                         success:
                         function(respuesta){ 
                             //alert(respuesta);
@@ -45,17 +53,27 @@
                                 if(key=='imgPerfil')
                                     document.getElementById(key).src=value;
                                 else
-                                    if(key=='nombre')
+                                    if(key=='nombre'|| key=='correo' || key=='descripcion')
                                      document.getElementById(key).innerHTML=value;
                                     else
-                                        if( key=='correo' || key=='descripcion')
-                                            document.getElementById(key).innerHTML=value;
-                                    else{
-                                        document.getElementById(key).value=value;
-                                    }
+                                       if(key=='seguir'){
+                                           if(value=='true')
+                                               document.getElementById("seguir").innerHTML="Siguiendo";
+                                       }
                             })                                   
                         }
                     })
+                );
+            }
+            function seguirPerfil()
+            {
+                $.post(
+                  "../agregaDatos",
+                  {tipoPeticion:6,user:<%=usrId%>,visitante:<%=usrVisita%>,visita:<%=visitante%>},
+                  function(respuesta)
+                  {
+                        $("#seguir").html(respuesta);
+                  }
                 );
             }
         </script>
@@ -211,6 +229,14 @@
                 width:50%;
                 height:10%;
             }
+            #seguir
+            {
+                position: absolute;
+                top:40%;
+                left:32.5%;
+                width:35%;
+                height:10%;
+            }
             #nombre{
                 position: relative;
                 top:10%;
@@ -243,6 +269,11 @@
                     <div id="nombre"  ><%=usr%></div><br/>
                     <div id="correo" ></div><br />
                     <div id="descripcion" ></div><br />
+                    <%
+                        if(visitante){
+                    %>
+                    <button id="seguir" onclick="seguirPerfil();">Seguir</button>
+                    <%}%>
             </div>
                     <!--<input id="seguir" name="seguir" type="button" value="Seguir"/><br />-->
 	</div>

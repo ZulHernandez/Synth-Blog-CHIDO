@@ -98,22 +98,47 @@ public class cLogica {
         }
         return result;
     }
-    public String getIntereses(){
-        String srcIntereses="<option value='0'> Elige un interes</option>";
+    public String getIntereses(String id){
+        Gson sGson=new Gson();
+        JsonObject json=new JsonObject();
+        JsonObject jsonInteresesPerfil=new JsonObject();
+        String srcIntereses []=null;
+        String idIntereses[]=null;
+        ArrayList<String>interesesUsr=new ArrayList<String>();
+        int totalIntereses=0;
+        int cont=0;
         BD.cDatos sql=new BD.cDatos(bd);
         ResultSet rsInteres=null;
         try{
             sql.conectar();
             rsInteres=sql.consulta("call _obtenIntereses();");
+            rsInteres.last();
+            totalIntereses=rsInteres.getRow();
+            rsInteres.beforeFirst();
+            srcIntereses= new String [totalIntereses];
+            idIntereses=new String[totalIntereses];
             while(rsInteres.next()){
-                srcIntereses+="<option value='"+rsInteres.getString("Interes")+"'>"
-                        +rsInteres.getString("Genero")+"</option>";
+               
+                srcIntereses[cont]=rsInteres.getString("Genero");
+                idIntereses[cont]=rsInteres.getString("Interes");
+                cont++;
             }
+            json.addProperty("Total", totalIntereses);
+            json.add("Intereses",sGson.toJsonTree(idIntereses));
+            json.add("Generos",sGson.toJsonTree(srcIntereses));
+            rsInteres=sql.consulta("call _interesesUsr("+id+");");
+            while(rsInteres.next())
+            {
+               interesesUsr.add(rsInteres.getString("registro"));
+            }
+            json.add("interesesPerfil",sGson.toJsonTree(interesesUsr.toArray()));
+            
         }catch(Exception e){
             this.error=e.getMessage();
+            System.out.println(this.error);
         }
-        
-        return srcIntereses;
+       
+        return json.toString();
     }
     public String validarRecuperacion(String correoC, String correoR){
         String resultado="";
@@ -221,7 +246,9 @@ public class cLogica {
         }
         return resultado;
     }
+    
     public String [] traePerfil(String idUsr,int i){
+
         BD.cDatos sql=new BD.cDatos(bd);
         ResultSet rsPerfil=null;
         String []datos=new String[i==1?5:4];
@@ -249,7 +276,7 @@ public class cLogica {
                     //datos[0]=rsPerfil.getString("estado");
             }
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("D: "+e.getMessage());
             this.error=e.getMessage();
         }
         return datos;
@@ -370,6 +397,45 @@ public class cLogica {
             }
         }catch(Exception e){
            this.error = "at cLogica.registraContenidoT: " + e.getMessage();
+        }
+        return msj;
+    }
+    public String seguirCuenta(String seguido,String seguidor)
+    {
+        BD.cDatos sql=new BD.cDatos(bd);
+        ResultSet rsSeguir=null;
+        String estado="";
+        try
+        {
+            sql.conectar();
+            rsSeguir=sql.consulta("call _registraSeguidor("+seguido+","+seguidor+");");
+            if(rsSeguir.next())
+                estado=rsSeguir.getString("estado");
+        }catch(Exception e)
+        {
+            this.error=e.getMessage();
+             System.out.println(this.error);
+        }
+        return estado;
+    }
+    public boolean seSiguen(String seguido,String seguidor)
+    {
+        BD.cDatos sql=new BD.cDatos(bd);
+        ResultSet rsSeguimiento=null;
+        boolean msj=false;
+        try
+        {
+            sql.conectar();
+            rsSeguimiento=sql.consulta("call _seSiguen("+seguido+","+seguidor+");");
+            if(rsSeguimiento.next())
+            {
+                if(rsSeguimiento.getString("seguimiento").contains("Si"))
+                    msj=true;
+            }
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            this.error=e.getMessage();
         }
         return msj;
     }

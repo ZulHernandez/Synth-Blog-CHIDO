@@ -30,7 +30,7 @@ public class cInicio {
             sql.conectar();
             ResultSet gatito = sql.consulta("call _traepostinicio("+id+");");
             while(gatito.next()){
-                src += "<div class=\"container\">";
+                src += "<div class=\"container\" data-regis='"+gatito.getString("idCuenta")+"'>";
                     src += "<div>";
                        
                            
@@ -44,9 +44,9 @@ public class cInicio {
                                 src += "<span id='spTxt'>"+gatito.getString("texto")+"</span>";
                                 if(!reformat(gatito.getString("imagenpost")).isEmpty())src += "<div class=\"apart\"><img width=10% height=10% src=\""+gatito.getString("imagenpost")+"\"><br /><span id='spCab'>"+gatito.getString("cabeceraimagenpost")+"</span></div>";
                                 
-                                if(!reformat(gatito.getString("audiopost")).isEmpty())src += "<div class=\"apart\"><a id='audio' href=\""+gatito.getString("audiopost")+"\" download=\""+FilenameUtils.getName(gatito.getString("audiopost"))+"\"><button id='cabAudio'>"+gatito.getString("cabeceraaudiopost")+"</button></div>";
-                                if(esSeguido(id, gatito.getInt("idCuenta")))src += "<button class=\"seguido\" onclick=\"seguir("+gatito.getString("idCuenta")+",this);\">Seguido</button>";
-                                else src += "<button onclick=\"seguir("+gatito.getString("idCuenta")+",this);\" class=\"seguir\">Seguir</button>";
+                                if(!reformat(gatito.getString("audiopost")).isEmpty())src += "<div class=\"apart\"><a id='audio' href=\""+gatito.getString("audiopost")+"\" download=\""+FilenameUtils.getName(gatito.getString("audiopost"))+"\"><button id='cabAudio'>"+gatito.getString("cabeceraaudiopost")+"</button></div></a></br>";
+                                src += "<button id='verPerfil' onclick=\"verPerfil(this);\">Ver pefil</button>";
+                                
                                 src += "</div></div><br /><br />";
             }
         }catch(Exception e){
