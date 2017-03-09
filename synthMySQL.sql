@@ -458,7 +458,7 @@ declare idP int;
 declare msj nvarchar(50);
 set existe =  (select count(*) from post where idCuenta=idC and titulo = title);
 if(existe = 1) then 
-	set msj = 'Registro existente.'; 
+	set msj = 'Ya existe un post con el mismo titulo'; 
     set idP = -1;
 else 
 	set idP = (select ifnull(max(idPost),0)+1 from post); 
@@ -548,7 +548,7 @@ drop procedure if exists _obtenPost;
 delimiter gatito
 create procedure _obtenPost(in idC int)
 begin
-	select * from vwpost where vwpost.idCuenta = idC;
+	select * from vwpost where vwpost.idCuenta = idC order by fecha desc,idPost desc;
 end gatito
 delimiter ;
 

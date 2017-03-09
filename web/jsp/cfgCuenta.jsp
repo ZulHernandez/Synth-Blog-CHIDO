@@ -40,7 +40,19 @@
                     $("#dir").attr("value",input.files[0].name);
                 }
             }
+            function initConfig()
+            {
+                $("#container").hide();
+                $("body").prepend("<div class='loader'></div>");
+                $("div[class='loader']").css("display","none");
+                $("div[class='loader']").css("position","absolute");
+                $("div[class='loader']").css("z-index","2");
+                $("div[class='loader']").css("left","45%");
+                $("div[class='loader']").css("top","30%");
+                $("div[class='loader']").show("slow",function(){traeIntereses();});
+            }
             function traeIntereses(){
+                
                 $("#intereses").ready(
                         $.post(
                             "../agregaDatos",
@@ -52,6 +64,7 @@
                             var intPerfil=respuesta.interesesPerfil;
                             var encontrado='';
                             var vecesEncontrado=0;
+                           
                             for(var i=0;i<total;i++)
                             {
                                 encontrado=$.inArray(respuesta.Intereses[i],intPerfil);
@@ -64,7 +77,7 @@
                                 else
                                   $("#todosIntereses").append("<button id='btn-interes' onclick='agregarInteres(this);' data-tipo='general' data-regis='"+respuesta.Intereses[i]+"'>"+respuesta.Generos[i]+"</button>");
                             };
-                            if(vecesEncontrado>0)
+                            if(vecesEncontrado==0)
                                 $("#interesesCuenta").html("<span>Elige algún interes</span>");
                             traePerfil();
                         }
@@ -81,7 +94,7 @@
                 if($("#interesesCuenta").find("span").length>0)
                 {
                    $.each($("#interesesCuenta").find("span"),function(key,value){
-                       this.remove()});
+                       this.remove();});
                 }   
                 if(cantIntereses>2 && tipo=='general')
                 {
@@ -199,33 +212,47 @@
                                    "../agregaDatos",
                                  {tipoPeticion:"2",nvoDato:elemento,user:<%=usrId%>,tipo:dato,clavUsr:$("#pass").val()},
                                  function(respuesta){
-                                     $("#prompt").html("<span id='mensajeClave' class='sinMensaje'>"+respuesta+"</span>");
-                                     $("#mensajeClave").css("top","45%");
+                                     
+                                     $("#prompt").html("<span id='mensajeClave' class='sinMensaje'>"+respuesta+"</span><br />");
+                                     $("#prompt").append("<button id='entendido' >Entendido</button>");
+                                    
+                                     $("#entendido").click(
+                                      function(){
+                                     
+
+                                                    $("#prompt").animate(
+                                                      {"height":"-=30%"},"slow"
+
+                                                        ,function()
+                                                        {
+                                                            $("#prompt").hide("slow",function(){ 
+                                                                $("#prompt").remove(); 
+                                                                $("div[class='fondo']").animate(
+                                                                        {"height":"-=100%"},"slow",
+                                                                         function(){
+                                                                             $("div[class='fondo']").remove()
+                                                                             if(!respuesta.includes("Error"))
+                                                                             location.reload();
+                                                                         });
+                                                                     })
+                                                        });
+                                                     
+                                        }
+                                      );
+                                     $("#entendido").css("display","none");
+                                     $("#entendido").css("position","absolute");
+                                     $("#entendido").css("left","71%");
+                                     $("#entendido").css("top","71%");
+                                     $("#mensajeClave").css("height","60%");
+                                     $("#mensajeClave").css("width","80%");
+                                     $("#mensajeClave").css("left","10%");
+                                     $("#mensajeClave").css("top","10%");
                                      $("#mensajeClave").css("display","none");
-                                     $("#mensajeClave").show("slow");
+                                     $("#mensajeClave").show("slow",function(){$("#entendido").show("slow");});
+                                     
                                      setTimeout(function(){
-                                     if(respuesta.includes("Error"))
-                                     {
-                                        
-                                          $("#prompt").animate(
-                                                  {"height":"-=30%"},"slow"
-
-                                                    ,function()
-                                                    {
-                                                        $("#prompt").hide("slow",function(){ 
-                                                            $("#prompt").remove(); 
-                                                            $("div[class='fondo']").animate(
-                                                                    {"height":"-=100%"},"slow",
-                                                                     function(){
-                                                                         $("div[class='fondo']").remove()
-                                                                     });
-                                                                 })
-                                                    });
-
-                                            
-                                     }else
-                                         location.reload();
-                                     },2550);
+                                     
+                                     },3000);
                                     
                                     }
                                 );
@@ -256,6 +283,8 @@
                     })
                 
                 );
+                $("div[class='loader']").remove();
+                $("#container").show("slow");
             }
             
             
@@ -269,6 +298,7 @@
       }
       .loader
       {
+            vertical-align: center;
             display:none;
             position: relative;
             left:30%;
@@ -458,7 +488,7 @@
        
     </style>
     </head>
-    <body onload="traeIntereses();">
+    <body onload="initConfig();">
         <!--<form id="datosCta" name="datosCta" method="post" action="../cambiaDatos">-->
     <div id="container">
        <div id="datosP1" >
@@ -476,9 +506,9 @@
                     <input type="button" value="Cambiar Descripción" onclick="datoModif(5);"  /><br /><br />
                     <span id='cabTodosInt' class='cabInteres' >Intereses</span>  
                     <div id="todosIntereses" class="interesContainer"> </div>
-                    <span id='cabIntCuent' class='cabInteres' >Tus intereses</span>
+                    <span id='cabIntCuent' class='cabInteres' >Intereses actuales</span>
                     <div id="interesesCuenta" class="interesContainer" > </div>
-                    <button id="envio" onclick="cambiarIntereses();">Cambiar Intereses</button>
+                    <button id="envio" onclick="datoModif(4);">Cambiar Intereses</button>
        </div>
         <div id="datosP2" >
                 <form id="imgPefil" name="imgPerfil" method="post" action="../agregaImg" enctype="multipart/form-data">

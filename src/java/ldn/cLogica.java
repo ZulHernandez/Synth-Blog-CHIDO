@@ -6,7 +6,10 @@
 package ldn;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -232,14 +235,45 @@ public class cLogica {
         return vacios;
     }
     public String modifDatosCta(String idUsr,String nvoDato,String clav,String tipo){
+        Gson parser=new Gson();
+        JsonParser parseador=new JsonParser();
+        System.out.println(parser.toJsonTree(nvoDato).toString());
+        
+        JsonObject nuevosDatos=parseador.parse(parser.toJsonTree(nvoDato).getAsString()).getAsJsonObject();
         BD.cDatos sql=new BD.cDatos(bd);
         ResultSet rsModif=null;
-        String resultado="";
+        String resultado="Estatus de modificación: <br/>";
+        
         try{
             sql.conectar();
-            rsModif=sql.consulta("call _modificarCuenta('"+idUsr+"','"+clav+"','"+nvoDato+"','"+tipo+"');");
-            if(rsModif.next()){
-                resultado=rsModif.getString("Estado");
+            if(!tipo.equals("4"))
+            {
+                rsModif=sql.consulta("call _modificarCuenta('"+idUsr+"','"+clav+"','"+nvoDato+"','"+tipo+"');");
+                if(rsModif.next())
+                {
+                    resultado=rsModif.getString("estado");
+                }
+            }
+            else
+            {
+               JsonArray arr= nuevosDatos.getAsJsonArray("Intereses");
+               if(arr.size()>0 && arr.size()<=3)
+               {
+                    for(int i=0;i<arr.size();i++)
+                    {
+                        rsModif=sql.consulta("call _agregarInteres("+idUsr+","+arr.get(i)+","+i+");");
+                        if(rsModif.next())
+                        {
+                            resultado+=rsModif.getString("estado")+"<br/>";
+                        }
+                    }
+               }
+               else
+                   throw new Exception("Número de intereses enviados no permitido.");
+
+                      
+                
+                
             }
         }catch(Exception e){
             this.error=e.getMessage();

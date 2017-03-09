@@ -137,11 +137,12 @@ function traeCampo(numCampo){
 }
 function datoModif(numDato){
     var elemento=traeCampo(numDato);
-    var valor='';
+    var valor=[];
     if(numDato==6)
         document.getElementById(elemento).value=document.getElementById("nuevaImg").files[0].name;
     if(numDato==4)
     {
+        //JSON.stringfy
        var jsonIntereses='';
         $.each($("#interesesCuenta").find("button"),function(key,value){
             if(this.dataset.tipo=='perfil')
@@ -152,7 +153,9 @@ function datoModif(numDato){
                 alert("Error:Tipo de interés incorrecto, vuelve a agregar tus intereses.");
             }
         });
-        jsonIntereses.push({"Intereses":valor});
+       
+        jsonIntereses=JSON.stringify({"Intereses":valor});
+        alert(jsonIntereses);
         validarNvoDato(numDato,jsonIntereses);
     }
     else
@@ -193,7 +196,7 @@ function validarNvoDato(dato,eleme)
                 break;
         }
     }else{
-        elemento=dato;
+        elemento=eleme;
         envioValido=true;
     }
     if(!envioValido){
@@ -215,8 +218,8 @@ function validarNvoDato(dato,eleme)
         else
             campo=traeCampo(dato);
             
-            var s=confirm("¿Seguro que quieres modificar?");
-            if(s){
+            var confirmacion=confirm("¿Seguro que quieres modificar?");
+            if(confirmacion){
             
                    insertarClave('Confirma tu contraseña por favor.',elemento,dato);
                 }else

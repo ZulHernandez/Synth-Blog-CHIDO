@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -73,24 +74,32 @@ public class seguir extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String resp = "";
+        JsonObject resp = new JsonObject();
         try{
             String bd = request.getParameter("bd") == null ? "" : request.getParameter("bd");
             String id = request.getParameter("id") == null ? "" : request.getParameter("id");
             String ids = request.getParameter("ids") == null ? "" : request.getParameter("ids");
             System.out.println(bd + "-" + id + "-" + ids);
-            if(bd.isEmpty() || id.isEmpty() || ids.isEmpty()) throw new Exception("problemas con el servidor. Intentalo mas tarde");
-            if(id.equals(ids)) throw new Exception("No puedes seguirte a ti mismo");
+            if(bd.isEmpty() || id.isEmpty() || ids.isEmpty()){
+                throw new Exception("problemas con el servidor. Intentalo mas tarde");
+            }
+            if(id.equals(ids)){
+                throw new Exception("W::No puedes seguirte a ti mismo");
+            }
             new ldn.cInicio(Integer.parseInt(bd)).registraSeguidor(id,ids);
-            resp = "peticion exitosa";
+            resp.addProperty("msg", "Exito");
+            resp.addProperty("status","OK");
         }catch(Exception e){
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            resp = "ERROR: " + sw.toString();
+            if(e.getMessage().startsWith("W::")){
+                resp.addProperty("msg", e.getMessage().substring(3));
+                resp.addProperty("status","WARNING");
+            }else{
+                resp.addProperty("msg", e.getMessage());
+                resp.addProperty("status","ERROR");
+            }
         }
         PrintWriter out = response.getWriter();
-        out.print(resp);
+        out.print(resp.toString());
     }
 
     /**

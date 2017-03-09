@@ -154,33 +154,72 @@
             border-color: white;
             border-width: 2px;
         }
+        textarea
+        {
+            overflow-y: auto;
+        }
+        #titulo,#cabecera
+        {
+            width:50%;
+            
+        }
+        #containerImg
+        {
+            display:inline-block;
+            width:40%;
+            height:100%;
+            position: absolute;
+            left:60%;
+            top:0%;
+        }
+        .containerPost
+        {
+            width:70%;
+            left:15%;
+        }
+        #preview
+        {
+            position:relative;
+            left:15%;
+            width:50%;
+            height:40%;
+        }
     </style>
     </head>
     
     <body>
-        <div class="container">
+        <div class="container containerPost">
             <form id="elform" name="elform" method="post" enctype="multipart/form-data" action="../teoria">
-                <table cellspacing="10" width="100%">
-                    <tbody>
-                    <tr>
-                        <td align="center" colspan="2">Titulo: <input type="text" placeholder="titulo del apartado teórico" id="titulo" name="titulo"></td>
-                    </tr>
-                    <tr>
-                        <td width="70%">Descripcion: <br><textarea id="descripcion" class="area" rows="4" maxlength="300" name="descripcion" placeholder="Breve descripcion del contenido de este apartado teorico"></textarea></td>
-                        <td align="center">
-                            <img src="/Synth_BLOG/img/Corchea.jpg" id="preview" name="preview" width="150" height="150"><br>
-                            <input id="contenido" name="contenido" type="file" onchange="cambiaImg(this);"><br>
-                            <input type="text" id="cabecera" name="cabecera" placeholder="Cabecera de la imagen">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">Contenido:<br><textarea id="cuerpo" class="area" rows="4" maxlength="500" name="cuerpo" placeholder="Contenido del apartado teorico"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td align="right" colspan="2"><input type="button" id="enviar" name="enviar" onclick="validarH();" value="ENVIAR" /></td>
-                    </tr>
-                    </tbody>
-                </table>
+                Título: 
+                <br />
+                <input type="text" placeholder="titulo del apartado teórico" id="titulo" name="titulo">
+                <br />
+                <br />
+                Descripción: 
+                <br>
+                <textarea id="descripcion" class="area" rows="5" cols="70" maxlength="200" name="descripcion" placeholder="Breve descripción de este apartado teórico"></textarea>
+                <br />
+                Contenido:
+                <br>
+                <textarea id="cuerpo" class="area" rows="10" cols="70" maxlength="2000" name="cuerpo" placeholder="Contenido del apartado teórico"></textarea>
+                <br />
+                <div id='containerImg'>
+                    <br />
+                    <img src="/Synth_BLOG/img/Corchea.jpg" id="preview" name="preview" >
+                    <br/>
+                    <br />
+                    <input id="contenido" name="contenido" type="file" onchange="cambiaImg(this);">
+                    <br/>
+                    <br />
+                    <input type="text" id="cabecera" name="cabecera" placeholder="Cabecera de la imagen">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <input type="button" id="enviar" name="enviar" onclick="validarH();" value="ENVIAR" />
+                </div>
+                
             </form>
         </div>
     </body>

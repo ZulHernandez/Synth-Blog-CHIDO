@@ -19,8 +19,53 @@
         <link href="../styles/sweetalert.css" rel="stylesheet" type="text/css"/>
        <link href="../styles/teoria.css" rel="stylesheet" type="text/css"/>
        <script type="text/javascript">
-         
-               function verPerfil(btnCuenta)
+           
+          
+           function seguir(idss,boton){
+               if(boton.innerHTML == "Seguir"){
+                   boton.innerHTML = "Seguido";
+                   boton.className = "seguido";
+               }else{
+                   boton.innerHTML = "Seguir";
+                   boton.className = "seguir";
+               }
+               jQuery.ajax({
+                    url:"../seguir",
+                    type:"POST",
+                    data: {id:<%=id%>,ids:idss,bd:<%=bd%>},
+                    success: function(respuesta){
+                        var resp = JSON.parse(respuesta);
+                        var typ,tit;
+                        switch(resp.status){
+                            case "ERROR":
+                                typ = "error";
+                                tit = "Ops...";
+                                boton.innerHTML = "Seguir";
+                                boton.className = "seguir";
+                                break;
+                            case "WARNING":
+                                typ = "error";
+                                tit = "Error";
+                                boton.innerHTML = "Seguir";
+                                boton.className = "seguir";
+                                break;
+                        }
+                        alert(resp.status);
+                        if(respuesta.status != "OK")swal({
+                            title: tit,
+                            text: resp.msg,
+                            type: typ,
+                            showCancelButton: false,
+                            showConfirmButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "ENTENDIDO",
+                            closeOnConfirm: true,
+                            closeOnCancel: true
+                        });
+                    }
+                });
+                }
+                      function verPerfil(btnCuenta)
                     {
                         var regis=btnCuenta.parentNode.parentNode.dataset.regis;
                         alert(regis);

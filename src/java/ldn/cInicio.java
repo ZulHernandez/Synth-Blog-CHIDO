@@ -30,7 +30,7 @@ public class cInicio {
             sql.conectar();
             ResultSet gatito = sql.consulta("call _traepostinicio("+id+");");
             while(gatito.next()){
-                src += "<div class=\"container\" data-regis='"+gatito.getString("idCuenta")+"'>";
+                 src += "<div class=\"container containerPub\" data-regis='"+gatito.getString("idCuenta")+"'>";
                     src += "<div>";
                        
                            
@@ -41,11 +41,11 @@ public class cInicio {
                        
                          
                                 src += "<span id='spTit'>"+gatito.getString("titulo")+"</span><br /><br />";
-                                src += "<span id='spTxt'>"+gatito.getString("texto")+"</span>";
-                                if(!reformat(gatito.getString("imagenpost")).isEmpty())src += "<div class=\"apart\"><img width=10% height=10% src=\""+gatito.getString("imagenpost")+"\"><br /><span id='spCab'>"+gatito.getString("cabeceraimagenpost")+"</span></div>";
+                                src += "<span id='spTxt'>"+gatito.getString("texto")+"</span><br />";
+                                if(!reformat(gatito.getString("imagenpost")).isEmpty())src += "<div class=\"apart\"><img width=10% height=10% src=\""+gatito.getString("imagenpost")+"\"><br /><span id='spCab'>"+gatito.getString("cabeceraimagenpost")+"</span></div><br />"; //+gatito.getString("cabeceraaudiopost")+
                                 
-                                if(!reformat(gatito.getString("audiopost")).isEmpty())src += "<div class=\"apart\"><a id='audio' href=\""+gatito.getString("audiopost")+"\" download=\""+FilenameUtils.getName(gatito.getString("audiopost"))+"\"><button id='cabAudio'>"+gatito.getString("cabeceraaudiopost")+"</button></div></a></br>";
-                                src += "<button id='verPerfil' onclick=\"verPerfil(this);\">Ver pefil</button>";
+                                if(!reformat(gatito.getString("audiopost")).isEmpty())src += "<div class=\"apart\"><a id='audio' href=\""+gatito.getString("audiopost")+"\" download=\""+FilenameUtils.getName(gatito.getString("audiopost"))+"\"><button id='cabAudio' class='seguir' >Descargar archivo adjunto</button></div></a></br>";
+                                src += "<button id='verPerfil' class='seguir' onclick='verPerfil(this)' >Ver perfil</button>";
                                 
                                 src += "</div></div><br /><br />";
             }

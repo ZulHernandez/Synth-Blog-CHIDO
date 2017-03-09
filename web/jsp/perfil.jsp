@@ -72,6 +72,7 @@
                   {tipoPeticion:6,user:<%=usrId%>,visitante:<%=usrVisita%>,visita:<%=visitante%>},
                   function(respuesta)
                   {
+                      alert(respuesta);
                         $("#seguir").html(respuesta);
                   }
                 );
@@ -100,15 +101,16 @@
             }
             .container
             {
-                width:90%;
-                height:70%;
-                margin-top: 5%;
-                background-color: rgba(214,214,214,0.3);
-                box-shadow: 0px 0px 20px #000000;
-                    border-radius:3px;
-                color: black;
                 position: relative;
-                left:5%;
+                color:white;
+                left:3%;
+                width:90%;
+                height:65%;
+                padding: 2%;
+                margin-top: 1%;
+                background-color: rgba(21,133,183,.7);
+                box-shadow: 0px 0px 20px #000000;
+                border-radius:3px;
                 
             }
             #imgUsr
@@ -254,9 +256,9 @@
                 height:80%;
                 margin-top: 10%;
                 left:10%;
-                    background-color: rgba(214,214,214,0.3);
-                    box-shadow: 0px 0px 20px #000000;
-                    border-radius:3px;
+                background-color: rgba(21,133,183,.7);
+                box-shadow: 0px 0px 20px #000000;
+                border-radius:3px;
             }
         </style>
     </head>

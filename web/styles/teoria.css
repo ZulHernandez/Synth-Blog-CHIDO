@@ -14,24 +14,40 @@ and open the template in the editor.
 body{
     font-family: "Roboto";
     padding: 15px;
+    background:url("../img/fondomusica1.jpg ");
+			margin:0px;
 }
 .container{
-    background-color: purple;
-    color: white;
-    display: inline-block;
-    width:95%;
-    padding: 10px;
-    border-radius: 7px;
+    position: relative;
+    color:white;
+    left:3%;
+    width:90%;
+    height:30%;
+    padding: 2%;
+    margin-top: 1%;
+    background-color: rgba(21,133,183,.7);
+    box-shadow: 0px 0px 20px #000000;
+    border-radius:3px;
+}
+.containerPub
+{
+    width:60%;
+    height:20%;
+    left:20%;
 }
 .seguir{
+    width: 20%;
     background-color: white;
-    border-color: blue;
-    color: blue;
+    color:  RGB(21,133,183);
+    border-color: transparent;
+    -webkit-transition-duration: 0.2s; 
+    transition: all 0.2s;
+    display: inline-block;
+    cursor: pointer;
 }
-.seguido{
-    background-color: blue;
-    border-color: white;
-    color: white;
+.seguir:hover{
+    background-color:  RGB(21,133,183);
+    color:white;
 }
 ::-webkit-scrollbar{
   width: 10px;
@@ -54,48 +70,24 @@ body{
 ::-webkit-scrollbar-thumb:window-inactive {
   background: transparent;
 }
-.area
-{
-    background-color: #121D24;
-    color: black;
-    padding: 10px;
-    display: block;
-    border: none;
-    width: 95%;
-    overflow: none;
-    font-family: inherit;
-    height: 130px;
-    resize: none;
-    background-color: white;
-}
+
 #archivo
 {
     background-color: inherit;
     border-radius: 5px;
     padding:10px
 }
-#enviar
+#enviar,#boto
 {
     width: 40%;
-    background-color: RGB(21,133,183);
-    color: white;
+     background-color: white;
+    color:  RGB(21,133,183);
     border-color: transparent;
     -webkit-transition-duration: 0.2s; 
     transition: all 0.2s;
     display: inline-block;
     cursor: pointer;
 
-}
-#boto
-{
-    width: 20%;
-    background-color: RGB(21,133,183);
-    color: white;
-    border-color: transparent;
-    -webkit-transition-duration: 0.2s; 
-    transition: all 0.2s;
-    display: inline-block;
-    cursor: pointer;
 }
 
 #enviar:hover,#boto:hover
@@ -128,3 +120,10 @@ body{
 {
     zoom:1.5;
 }  
+table
+{
+   border-spacing: 15px 20px;
+}
+input[type=text],input[type=password],input[type=number]{
+   width: 100%;
+}

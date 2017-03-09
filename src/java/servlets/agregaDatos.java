@@ -6,7 +6,7 @@
 package servlets;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -56,9 +56,9 @@ public class agregaDatos extends HttpServlet {
              int bd=Integer.parseInt(sesion.getAttribute("bd").toString());
              ldn.cLogica trae=new ldn.cLogica(bd);
              Clases.cCifrado cred=new Clases.cCifrado();
-             Gson s=new Gson();
                 //valor asignado por default, debe traerse el valor desde 
              //la sesion
+             //validar usuario y contraseña en el ss 
              if(tipoPeticion.equals("0"))
              {
                  
@@ -84,11 +84,16 @@ public class agregaDatos extends HttpServlet {
                          out.print(jsPerfil.toString());
                  }else
                    if(tipoPeticion.equals("2")){
+                       System.out.println("Estos son los intereses");
+                       Gson s=new Gson();
+                      
+                     
+                       
                      String datos []={idUsr,clavUsr,tipo,nvoDato};
                      if(!trae.datosVacios(datos))
                      {
                          respuesta=trae.modifDatosCta(idUsr,nvoDato, clavUsr, tipo);
-                         out.print(respuesta+trae.getError());
+                         out.write(respuesta+trae.getError());
                          if(respuesta.equals("Clave modificada")|| respuesta.equals("Correo modificado")){
                             if(tipo.equals("2")||tipo.equals("3")){
                                 tipo=cred.Encriptar(tipo);
@@ -155,7 +160,7 @@ public class agregaDatos extends HttpServlet {
                                     if(Boolean.valueOf(visita))
                                     {
                                        //if(!trae.seSiguen(visitante,idUsr))
-                                        estatusSeguimiento=trae.seguirCuenta(idUsr, visitante);
+                                        estatusSeguimiento=trae.seguirCuenta(visitante, idUsr);
                                         out.write(estatusSeguimiento);
                                            
                                     }

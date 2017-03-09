@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -38,25 +39,34 @@ public class post extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        JsonObject resp = new JsonObject();
         try{
             String tipo = request.getParameter("tipo") == null ? "" : request.getParameter("tipo");
             String titulo = request.getParameter("titulo") == null ? "" : request.getParameter("titulo");
             String descripcion = request.getParameter("descripcion") == null ? "" : request.getParameter("descripcion");
             int categoria = request.getParameter("categoria") == null ? -1 : Integer.parseInt(request.getParameter("categoria"));
-            if(tipo.equals("") || titulo.equals("") || descripcion.equals("") || categoria == -1) throw new Exception("No puedes dejar campos vacios. Intentalo nuevamente");
+            
+            //Si los campos estan vacios: error de validacion
+            if(tipo.equals("") || titulo.equals("") || descripcion.equals("") || categoria == -1){
+                throw new Exception("W::No puedes dejar campos vacios. Intentalo nuevamente");
+            }
             
             Part imagen = request.getPart("contenido");
             Part audio = request.getPart("audio");
             String cabeceraI = "";
             String cabeceraA = "";
             
+            boolean siimagen = false;
             if(imagen != null && !imagen.getContentType().equals("application/octet-stream")){
                 cabeceraI = request.getParameter("cabeceraI") == null ? "" : request.getParameter("cabeceraI");
-                if(cabeceraI.equals(""))throw new Exception("tu imagen no tiene cabecera. Agregale una antes de enviar los datos");
+                if(cabeceraI.equals(""))throw new Exception("W::tu imagen no tiene cabecera. Agregale una antes de enviar los datos");
+                else siimagen = true;
             }
+            boolean siaudio = false;
             if(audio != null && !audio.getContentType().equals("application/octet-stream")){
                 cabeceraA = request.getParameter("cabeceraA") == null ? "" : request.getParameter("cabeceraA");
-                if(cabeceraA.equals(""))throw new Exception("tu audio no tiene titulo. Agregale uno antes de enviar los datos");
+                if(cabeceraA.equals(""))throw new Exception("W::tu archivo no tiene cabecera. Agregale uno antes de enviar los datos");
+                else siaudio = true;
             }
             
             HttpSession ss = request.getSession();
@@ -66,29 +76,37 @@ public class post extends HttpServlet {
             
             ldn.cPost post = new ldn.cPost(db);
             String msg = post.nuevoPost(id,categoria,titulo,descripcion);
-            if(!post.getError().equals("")) throw new Exception(post.getError());
             if(post.getIdP() == -1) throw new Exception(msg);
             //msg se manda como error si idP = -1
             
             String result = "";
-            if(imagen != null && !imagen.getContentType().equals("application/octet-stream")){
+            if(siimagen){
                 String extension = FilenameUtils.getExtension(imagen.getSubmittedFileName());
-                result = Clases.Utilities.saveFile(imagen, "img", "imagen", "." + extension);
-                        System.out.println(result);
+                result = Clases.Utilities.saveFile(imagen, "imagenPost", "imagen", "." + extension);
                 if(result.startsWith("/")) result = post.registraContenidoP(Integer.toString(post.getIdP()),result,cabeceraI);
+                else throw new Exception(result);
                 msg += "\n" + result;
             }
-            if(audio != null && !audio.getContentType().equals("application/octet-stream")){
+            if(siaudio){
                 String extension = FilenameUtils.getExtension(audio.getSubmittedFileName());
                 System.out.println(extension);
                 result = Clases.Utilities.saveFile(audio, "audioPost", "audio", "." + extension);
                 if(result.startsWith("/")) result = post.registraContenidoP(Integer.toString(post.getIdP()),result,cabeceraA);
+                else throw new Exception(result);
                 msg += "\n" + result;
             }
-            out.print(msg);
+            resp.addProperty("status", "OK");
+            resp.addProperty("msg",msg);
         }catch(Exception e){
-            out.print("ERROR: " + e.getMessage());
+            if(e.getMessage().startsWith("W::")){
+                resp.addProperty("status", "WARNING");
+                resp.addProperty("msg",e.getMessage().substring(3));
+            }else{
+                resp.addProperty("status", "ERROR");
+                resp.addProperty("msg",e.getMessage());
+            }
         }
+        out.print(resp.toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

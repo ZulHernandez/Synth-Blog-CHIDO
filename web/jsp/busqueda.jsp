@@ -48,7 +48,7 @@
                     height:30%;
                     padding: 2%;
                     margin-top: 1%;
-                    background-color: rgba(214,214,214,0.3);
+                    background-color: rgba(21,133,183,.7);
                     box-shadow: 0px 0px 20px #000000;
                     border-radius:3px;
                 }
@@ -86,12 +86,12 @@
 		#btnsFiltros
 		{
 			padding: 5%;
-                        background-color: rgba(214,214,214,0.3);
 			width: 80%;
 			height: 80%;
 			left:5%;
 			position:relative;
 			top:10%;
+                        background-color: rgba(21,133,183,.7);
                         box-shadow: 0px 0px 20px #000000;
                         border-radius:3px;
 
@@ -143,7 +143,7 @@
                 {
                     display:none;
                     z-index: 2;
-                    background-color: RGB(21,133,183);
+                    background-color: rgba(21,133,183,.7);
                     color: white;
                     box-shadow: 0px 0px 20px #000000;
                     border-radius:3px;
