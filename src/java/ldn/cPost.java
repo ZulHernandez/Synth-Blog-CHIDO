@@ -67,6 +67,7 @@ public class cPost {
         return msj;
     }
     
+    //Trae post para el perfil
     private final int IMAGEN = 1;
     private final int AUDIO = 2;
     public String[] obtenPost(int idC){
@@ -78,16 +79,16 @@ public class cPost {
             gatito = sql.consulta("call _obtenPost('"+idC+"');");
             while(gatito.next()){
                 String row = "";
-                row += "<div class=\"container\" data-regPost="+gatito.getString("idPost")+" >";
-                row+="<span id='spName'>"+gatito.getString("usuario")+"</span><br />";
+                row += "<div class=\"container containerPub \" data-regPost="+gatito.getString("idPost")+" >";
+                row+="<span id='spName'>"+gatito.getString("usuario")+"</span><br /><br />";
                 row+="<span id='spDate'>"+gatito.getString("fecha")+"</span><br />";
                 row += "<img id=\"imgUsr\" src=\""+gatito.getString("foto")+" \"><br />"; 
                 
-                row+="<span id='spTit' >Tit:"+gatito.getString("titulo")+"</span><br /><br /><span id='spCateg'>Categoria: "+gatito.getString("interes")+"</span>";
-                if(!empty(gatito.getString("imagenpost")))row += "<img id='imgPost' src=\""+gatito.getString("imagenpost")+"\" width=\"200\" height=\"200\"><br /><span id='cabImg' >Imagen: "+gatito.getString("cabeceraimagenpost")+"</span>";
+                row+="<span id='spTit' >"+gatito.getString("titulo")+"</span><br /><br /><span id='spCateg'>Categoria: "+gatito.getString("interes")+"</span>";
+                if(!empty(gatito.getString("imagenpost")))row += "<img id='imgPost' src=\""+gatito.getString("imagenpost")+"\" width=\"200\" height=\"200\"><br /><span id='cabImg' >"+gatito.getString("cabeceraimagenpost")+"</span><br />";
                 row += "<span id='contPost'>"+gatito.getString("texto").replace("<","&lt;").replace(">","&gt;")+"</span><br />";
                
-                if(!empty(gatito.getString("audiopost")))row += "<span id='cabAudio'>" + gatito.getString("cabeceraaudiopost") + "</span><a id='audio' href=\""+gatito.getString("audiopost")+" download=\""+FilenameUtils.getName(gatito.getString("cabeceraaudiopost"))+"\"><button>Descargar</button></a>";
+                if(!empty(gatito.getString("audiopost")))row += "<span id='cabAudio'>" + gatito.getString("cabeceraaudiopost") + "</span><br /><a id='audio' href=\""+gatito.getString("audiopost")+"\" download=\""+FilenameUtils.getName(gatito.getString("cabeceraaudiopost"))+"\"><button class='seguir' >Descargar</button></a>";
                 row +="</div><br /><br />";
                 src.add(row);
             }

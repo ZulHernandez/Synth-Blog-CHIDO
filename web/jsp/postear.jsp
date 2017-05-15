@@ -47,14 +47,18 @@
                     $("#dir").attr("value",input.files[0].name);
                 }
             }
+            
             function colorear(selected){
                 var idd = selected.id;
-                for(var i = 1; i <= <%=categorias.length%>; i++){
-                    document.getElementById(i).style.backgroundColor = "RGB(225,0,203)";
+               for(var i = 1; i <= <%=categorias.length%>; i++){
+                    document.getElementById(i).style.backgroundColor = "white";
+                     document.getElementById(i).style.color = " RGB(21,133,183)";
                 }    
-                document.getElementById(idd).style.backgroundColor = "RGB(123,23,26)";
+                document.getElementById(idd).style.backgroundColor = "RGB(68,183,234)";
+                document.getElementById(idd).style.color="black";
                 categoria.value = selected.id;
             }
+            
             function validar(){
                 var titulo = document.getElementById("titulo").value;
                 var descripcion = document.getElementById("descripcion").value;
@@ -64,7 +68,7 @@
                 if(titulo == "" || descripcion == "" || categoria == ""){
                     swal({
                         title: 'ERROR',
-                        text: '<p>Los campos no pueden ser vacios</p><ul><li>Titulo</li><li>Contenido</li><li>Categoria</li><br><p>Por favor, llenalos</p>',
+                        text: '<p>Los campos no pueden estar vacios</p><ul><li>Titulo</li><li>Contenido</li><li>Categoria</li><br><p>Por favor, llenalos</p>',
                         type: 'error',
                         showConfirmButton: true,
                         confirmButtonColor: "#870900",
@@ -72,6 +76,13 @@
                         html: true
                     });
                 }else{
+                  
+                   $("body").prepend("<div class='fondo'> </div>");
+                   $("div[class='fondo']").animate({"height":"+="+$("body").prop('scrollHeight')},"slow");
+                   $("div[class='fondo']").append("<div class='loader'> </div>");
+                   $("div[class='loader']").show("slow",function(){
+                       $("body").css("overflow-y","hidden");
+                   $("#enviar").val("Publicando...");
                     var data = new FormData();
                     jQuery.each(jQuery('#contenido')[0].files, function(i, file) {
                         data.append('contenido', file);
@@ -85,8 +96,6 @@
                     data.append('categoria',categoria);
                     data.append('cabeceraI',cabeceraI);
                     data.append('cabeceraA',cabeceraA);
-                    document.getElementById("enviar").disabled = true;
-                    document.getElementById("enviar").value = "ENVIANDO...";
                     jQuery.ajax({
                         url: '../post',
                         data: data,
@@ -96,9 +105,26 @@
                         processData: false,
                         type: 'POST',
                         success: function(respuesta){
-                            var resp = JSON.parse(respuesta);
-                            document.getElementById("enviar").disabled = false;
-                            document.getElementById("enviar").value = "ENVIAR";
+                            //alert(respuesta);
+                            $("body").css("overflow-y","");
+                            $("#enviar").val("Publicar");
+                            $("div[class='fondo']").hide("slow", function(){mostrarRespuesta(respuesta);});
+                            
+                        }
+                    });
+                       
+                  });
+                   
+            }
+        }
+            
+                
+                function mostrarRespuesta(respuesta)
+                {
+                    var resp = $.parseJSON(respuesta);
+                    //alert(resp.status);
+                            //document.getElementById("enviar").disabled = false;
+                            //document.getElementById("enviar").value = "ENVIAR";
                             if(resp.status == "ERROR"){
                                 swal({
                                     title: "UPS...",
@@ -109,8 +135,10 @@
                                     html: false,
                                     animation: "slide-from-top"
                                 });
-                            }else if(resp.status == "OK"){
-                                swal({
+                            }else 
+                                if(resp.status == "OK"){
+                                swal(
+                                        {
                                     title: "EXCELENTE",
                                     text: resp.msg,
                                     type: "success",
@@ -129,7 +157,8 @@
                                         window.location = "postear.jsp";
                                     }
                                   });
-                            }else if(resp.status == "WARNING"){
+                            }
+                            else if(resp.status == "WARNING"){
                                 swal({
                                     title: "ALTO AHI!",
                                     text: resp.msg,
@@ -141,72 +170,123 @@
                                     animation: "slide-from-top"
                                 });
                             }
-                        }
-                    });
+                            $("div[class='fondo']").remove();
                 }
-            }
+            
         </script>
         <style type="text/css">
+        body
+        {
+            margin:0px;
+            padding: 0px;
+            width:100%;
+            height:100%;
+            overflow-x: hidden;
+        }
+     .loader
+      {
+            vertical-align: central;
+            display:none;
+            position: relative;
+            left:45%;
+            top:50%;
+            border: 16px solid #f3f3f3; 
+            border-top: 16px solid #3498db; 
+            border-radius: 50%;
+            width: 120px;
+            height:120px;
+            animation: spin 2s linear infinite;
+      }
+      @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+                }
+      .fondo
+      {
+          position: absolute;
+          width:100%;
+          height: 0%;
+          z-index:3;
+          opacity:.5 ;
+          background-color: black;
+         
+      }
             .selection{
-                background-color: RGB(225,0,203);
-            }
-            .selection:pressed{
                 background-color: white;
+                color: RGB(21,133,183);
             }
-           table
+
+           .input-titulo-corto
            {
-               border-spacing: 15px 20px;
-               background-color: purple;
+               width:40%;
+               height:5%;
+               position:absolute;
            }
-           input[type=text],input[type=password],input[type=number]{
-               width: 100%;
+           #contenido
+           {
+               position: absolute;
+               left:15%;
+               top:50%;
+               
+           }
+           #cabeceraI
+           {
+
+               left:15%;
+               top:55%;
+           }
+           #enviar
+           {
+               left:70%;
+               position: relative;
+               width:25%;
+               height:5%;
            }
         </style>
     </head>
-    <body><form id="formaso" name="formaso" action="../post" method="post" enctype="multipart/form-data">
-        <table  width="100%">
-            <tr><td height="100%">
+    <body>
+        <form id="formaso" name="formaso" action="../post" method="post" enctype="multipart/form-data">
             <div id="micha1" class="container">
-                <center>
-                    <table>
-                        <tr>
-                            <td>Titulo:</td>
-                            <td><input type="text" id="titulo" name="titulo" placeholder="Titulo del post"></td>
-                        </tr>
-                        <tr>
-                            <td>Categorias: </td>
-                            <td>
-                                <%for(String cat:categorias){%>
-                                    <input type="button" id="<%=cont%>" name="botoncitos" onclick="colorear(this);" class="selection" value="<%=cat%>">
-                                    <%cont++;%>
-                                <%}%>
-                                <input type="hidden" id="categoria" name="categoria" value="" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><input type="button" id="enviar" name="enviar" onclick="validar();" value="ENVIAR" /></td>
-                        </tr>
-                    </table>
-                </center>
-            </div></td>
-            <td width="60%"><div id="micha2" class="container" height="100%">
-                <table width="100%" height="100%">
-                    <tr>
-                        <td valign="middle" align="center" width="40%">
-                            <img src="/Synth_BLOG/img/Corchea.jpg" id="preview" name="preview"  width="150" height="150" ><br /><br>
-                            <input id="contenido" name="contenido" type="file" onchange="cambiaImg(this);" ><br/><br>
-                            <input type="text" id="cabeceraI" name="cabeceraI" placeholder="añade una cabecera a tu imagen" />
-                        </td>
-                        <td rowspan="2" width="60%"><textarea id="descripcion" class="area"  rows="10" maxlength="500" name="descripcion" placeholder="CONTENIDO..."></textarea></td>
-                    </tr>
-                    <tr>
-                        <td valign="middle" align="center" width="40%">
-                            <input type="file" id="audio" name="audio"><br><br>
-                            <input type="text" id="cabeceraA" name="cabeceraA" placeholder="Agrega una cabecera a tu archivo de audio">
-                        </td>
-                    </tr>
-                </table>
-            </div></td>
-        </table>
-    </form></body>
+               Titulo:
+               <br />
+               <input type="text" id="titulo" name="titulo" placeholder="Titulo del post" class="input-titulo-corto" >
+               <br />
+               <br />
+               <br />
+                Categoría: 
+                <br />
+                <br />
+                 <%for(String cat:categorias){%>
+                      <input type="button" id="<%=cont%>" name="botoncitos" onclick="colorear(this);" class="selection" value="<%=cat%>" >
+                      <%cont++;%>
+                  <%}%>
+                  <br />
+                  <br />
+                  Contenido:
+                  <input type="hidden" id="categoria" name="categoria" value="" />
+                  <br />
+                  <textarea id="descripcion" class="area" cols="150" rows="10" maxlength="500" name="descripcion" placeholder="CONTENIDO..."></textarea>
+                  <br />
+                     Agrega una imagen:
+                  <br />
+                  <br />
+                <img src="/Synth_BLOG/img/Corchea.jpg" id="preview" name="preview"  width="150" height="150" >
+                <br />
+                <input id="contenido" name="contenido" type="file" onchange="cambiaImg(this);" >
+                <br/>
+                <input type="text" id="cabeceraI" name="cabeceraI" placeholder="añade una cabecera a tu imagen" class="input-titulo-corto" />
+                <br />
+                Agrega un archivo de audio:
+                <br />
+                <br />
+                <input type="file" id="audio" name="audio">
+                <br><br>
+                <input type="text" id="cabeceraA" name="cabeceraA" placeholder="Agrega una cabecera a tu archivo de audio" class="input-titulo-corto" >
+                <br />
+                <br />
+                <input type="button" id="enviar" name="enviar" onclick="validar();" value="Publicar" />
+            </div>
+         </form>
+         <br />
+    </body>
 </html>

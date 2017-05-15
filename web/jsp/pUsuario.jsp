@@ -18,6 +18,7 @@
         <script src="../scripts/sweetalert.min.js" type="text/javascript"></script>
         <link href="../styles/sweetalert.css" rel="stylesheet" type="text/css"/>
        <link href="../styles/teoria.css" rel="stylesheet" type="text/css"/>
+       <link href="../styles/pub.css" rel="stylesheet" type="text/css"/>
        <script type="text/javascript">
            
           
@@ -67,7 +68,7 @@
                 }
                       function verPerfil(btnCuenta)
                     {
-                        var regis=btnCuenta.parentNode.parentNode.dataset.regis;
+                        var regis=btnCuenta.parentNode.dataset.regis;
                         alert(regis);
                         window.location="perfil.jsp?usr="+regis;
                     }
@@ -78,6 +79,10 @@
 		{
                         background:url("../img/fondomusica1.jpg ");
 			margin:0px;
+                        width:100%;
+                        height: 100%;
+                 overflow-x: hidden;
+
 		}
         input[type="radio"] {
           display: none;
@@ -96,9 +101,17 @@
         input[type="radio"]:checked ~ label {
           color: black;
         }
+        .pub-container
+        {
+            width:65%;
+            height: 100%;
+            position: absolute;
+            left:15%;
+        }
     </style>
     </head>
     <body>
+        <div class="pub-container">
         <%if(!inicio.getError().isEmpty()){%>
 			<textarea rows="50" cols="100" readonly><%=inicio.getError().replace("\n","<br>")%></textarea>
 		<%}else if(!src.isEmpty()){%>
@@ -106,5 +119,6 @@
 		<%}else{%>
 			<div class="container"><center><p>ESTO PARECE UNA TIERRA ARIDA</p><p>Para mostrar post que ver en tu pagina de inicio, debes comenzar a seguir diferentes cuentas o agregar intereses a tu cuenta.</p></center></div>
 		<%}%>
+        </div>
     </body>
 </html>

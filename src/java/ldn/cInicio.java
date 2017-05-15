@@ -23,6 +23,13 @@ public class cInicio {
         this.bd = bd;
         this.error = "";
     }
+    public boolean empty(String a){
+        if(a == null || a.isEmpty() || a.equals("null")){
+            return true;
+        }else return false;
+    }
+    
+    //Trae post para el muro
     public String traePostInicio(int id){
         String src = "";
         BD.cDatos sql = new BD.cDatos(bd);
@@ -30,24 +37,25 @@ public class cInicio {
             sql.conectar();
             ResultSet gatito = sql.consulta("call _traepostinicio("+id+");");
             while(gatito.next()){
-                 src += "<div class=\"container containerPub\" data-regis='"+gatito.getString("idCuenta")+"'>";
-                    src += "<div>";
+                 src += "<div class=\"container \" data-regis='"+gatito.getString("idCuenta")+"'>";
+                    //src += "<div>";
                        
                            
-                                src += "<span id='spName'>Usuario: "+gatito.getString("usuario")+"</span><br /><br />";
-                                src += "<span id='imgSrc'><img src=\""+gatito.getString("foto")+"\" width=\"50\" height=\"50\"></span><br /><br />";
-                                src += "<span id='spInte'>Interes: "+gatito.getString("interes")+"</span><br /><br />";
+                                src += "<span id='spName' onclick='verPerfil(this)' >"+gatito.getString("usuario")+"</span><br /><br />";
+                                src+= "<span id='spDate'>"+gatito.getString("fecha")+"</span><br />";
+                                src += /*<span id='imgSrc'>*/"<img id='imgUsr' src=\""+gatito.getString("foto")+"\" ><br />";
+                                src += "<span id='spCateg'>Categoría: "+gatito.getString("interes")+"</span>";
                                 
                        
                          
-                                src += "<span id='spTit'>"+gatito.getString("titulo")+"</span><br /><br />";
-                                src += "<span id='spTxt'>"+gatito.getString("texto")+"</span><br />";
-                                if(!reformat(gatito.getString("imagenpost")).isEmpty())src += "<div class=\"apart\"><img width=10% height=10% src=\""+gatito.getString("imagenpost")+"\"><br /><span id='spCab'>"+gatito.getString("cabeceraimagenpost")+"</span></div><br />"; //+gatito.getString("cabeceraaudiopost")+
+                                src += "<span id='spTit'>"+gatito.getString("titulo")+"</span><br />";
+                                src += "<span id='contPost'>"+gatito.getString("texto")+"</span><br />";
+                                if(!reformat(gatito.getString("imagenpost")).isEmpty())src += "<img id='imgPost' width=200 height=200 src=\""+gatito.getString("imagenpost")+"\" ><br /><span id='cabImg'>"+gatito.getString("cabeceraimagenpost")+"</span><br />"; //+gatito.getString("cabeceraaudiopost")+
                                 
-                                if(!reformat(gatito.getString("audiopost")).isEmpty())src += "<div class=\"apart\"><a id='audio' href=\""+gatito.getString("audiopost")+"\" download=\""+FilenameUtils.getName(gatito.getString("audiopost"))+"\"><button id='cabAudio' class='seguir' >Descargar archivo adjunto</button></div></a></br>";
-                                src += "<button id='verPerfil' class='seguir' onclick='verPerfil(this)' >Ver perfil</button>";
+                                if(!reformat(gatito.getString("audiopost")).isEmpty())src += "<span id='cabAudio'>" + gatito.getString("cabeceraaudiopost") + "</span><br /><a id='audio' href=\""+gatito.getString("audiopost")+"\" download=\""+FilenameUtils.getName(gatito.getString("cabeceraaudiopost"))+"\"><button  class='seguir' >Descargar archivo</button></a>";
+                                //src += "<br /><button id='verPerfil' class='seguir' onclick='verPerfil(this)' >Ver perfil</button>";
                                 
-                                src += "</div></div><br /><br />";
+                                src += "</div><br /><br />";
             }
         }catch(Exception e){
             StringWriter sw = new StringWriter();

@@ -238,8 +238,7 @@ public class cLogica {
         Gson parser=new Gson();
         JsonParser parseador=new JsonParser();
         System.out.println(parser.toJsonTree(nvoDato).toString());
-        
-        JsonObject nuevosDatos=parseador.parse(parser.toJsonTree(nvoDato).getAsString()).getAsJsonObject();
+
         BD.cDatos sql=new BD.cDatos(bd);
         ResultSet rsModif=null;
         String resultado="Estatus de modificación: <br/>";
@@ -256,6 +255,7 @@ public class cLogica {
             }
             else
             {
+               JsonObject nuevosDatos=parseador.parse(parser.toJsonTree(nvoDato).getAsString()).getAsJsonObject();
                JsonArray arr= nuevosDatos.getAsJsonArray("Intereses");
                if(arr.size()>0 && arr.size()<=3)
                {
@@ -451,7 +451,9 @@ public class cLogica {
              System.out.println(this.error);
         }
         return estado;
+
     }
+    
     public boolean seSiguen(String seguido,String seguidor)
     {
         BD.cDatos sql=new BD.cDatos(bd);
@@ -524,5 +526,83 @@ public class cLogica {
             System.out.println(error);
         }
         return results.toString();
+    }
+    
+
+    public String traerInteresesMasPosteados()
+    {
+        String registros="";
+        BD.cDatos sql=new BD.cDatos(bd);
+        ResultSet rsResultado=null;
+        ArrayList<String> intereses=new ArrayList<String>();
+        ArrayList<String> cantidadPubs=new ArrayList<String>();
+        JsonObject consulta=new JsonObject();
+        Gson xObj=new Gson();
+        int size=0;
+        try
+        {
+            sql.conectar();
+            rsResultado=sql.consulta("select * from vwPubsIntereses;");
+            while(rsResultado.next())
+            {
+                intereses.add(rsResultado.getString("Genero"));
+                cantidadPubs.add(rsResultado.getString("Publicaciones"));
+                size++;
+            }
+            consulta.addProperty("Size",size);
+            consulta.add("Gen",xObj.toJsonTree(intereses));
+            consulta.add("Cant",xObj.toJsonTree(cantidadPubs));
+            registros=consulta.toString();
+            System.out.println("La consulta: "+consulta.toString());
+        }catch(Exception e)
+        {
+            this.error=e.getMessage();
+            System.out.println(error);
+        }
+        finally{
+            sql.cierraConexion();
+        }
+        return registros;
+    }
+    
+    public String traerArtMasConsultados()
+    {
+        String registros="";
+        BD.cDatos sql=new BD.cDatos(bd);
+        ResultSet rsConsulta=null;
+        Gson convertidor=new Gson();
+        JsonObject jsonConsultas=new JsonObject();
+        ArrayList<String> articulos=new ArrayList<String>();
+        ArrayList<String> fechas=new ArrayList<String>();
+        ArrayList<String> consultas=new ArrayList<String>();
+        ArrayList<String> titulos=new ArrayList<String>();
+        int contadorConsultas=0;
+        try{
+            sql.conectar();
+            rsConsulta=sql.consulta("select * from vwArtMasConsultados;");
+            while(rsConsulta.next()){
+                articulos.add(rsConsulta.getString("Articulo"));
+                fechas.add(rsConsulta.getString("Publicado"));
+                consultas.add(rsConsulta.getString("Consultas"));
+                titulos.add(rsConsulta.getString("Titulo"));
+                contadorConsultas++;
+            }
+            jsonConsultas.addProperty("contador", contadorConsultas);
+            if(contadorConsultas!=0){
+                jsonConsultas.add("Art",convertidor.toJsonTree(articulos));
+                jsonConsultas.add("Fec",convertidor.toJsonTree(fechas));
+                jsonConsultas.add("Con",convertidor.toJsonTree(consultas));
+                jsonConsultas.add("Tit",convertidor.toJsonTree(titulos));
+                
+            }
+            registros=jsonConsultas.toString();
+        }catch(Exception e)
+        {
+            this.error=e.getMessage();
+            System.out.println(error);
+        }finally{
+            sql.cierraConexion();
+        }
+        return registros;
     }
 }

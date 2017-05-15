@@ -11,11 +11,12 @@ and open the template in the editor.
     font-family: "Roboto";
     src: url("/Synth_BLOG/fuentes/Roboto-Regular.ttf") format("truetype");
 }
+
 body{
     font-family: "Roboto";
     padding: 15px;
     background:url("../img/fondomusica1.jpg ");
-			margin:0px;
+    margin:0px;
 }
 .container{
     position: relative;
@@ -42,7 +43,7 @@ body{
     border-color: transparent;
     -webkit-transition-duration: 0.2s; 
     transition: all 0.2s;
-    display: inline-block;
+    /*display: inline-block;*/
     cursor: pointer;
 }
 .seguir:hover{
@@ -124,6 +125,4 @@ table
 {
    border-spacing: 15px 20px;
 }
-input[type=text],input[type=password],input[type=number]{
-   width: 100%;
-}
+

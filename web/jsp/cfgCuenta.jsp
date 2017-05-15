@@ -296,7 +296,7 @@
         width:100%;
         height: 100%;
       }
-      .loader
+            .loader
       {
             vertical-align: center;
             display:none;
@@ -318,12 +318,12 @@
           position: absolute;
           width:100%;
           height: 0%;
-          
           z-index:2;
           opacity:.5 ;
           background-color: black;
          
       }
+
       #container
       {
           z-index:1;

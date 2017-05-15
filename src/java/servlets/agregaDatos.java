@@ -56,117 +56,119 @@ public class agregaDatos extends HttpServlet {
              int bd=Integer.parseInt(sesion.getAttribute("bd").toString());
              ldn.cLogica trae=new ldn.cLogica(bd);
              Clases.cCifrado cred=new Clases.cCifrado();
-                //valor asignado por default, debe traerse el valor desde 
-             //la sesion
-             //validar usuario y contraseña en el ss 
-             if(tipoPeticion.equals("0"))
-             {
-                 
-                
-                 respuesta=trae.getIntereses(idUsr);
-                 out.print(respuesta);
-             }else
-                 if(tipoPeticion.equals("1") && !idUsr.equals(""))
-                 {
-                     //hacer JSON para regresar todo el array
-                     // con los datos para recibirlos 
-                     //con jquery
-                     
-                     String data[]=new String[5];
-                     
-                     data=trae.traePerfil(idUsr,1);
-                     String values[]={"usr","psw","mail","descrip","preview"};
-                     JsonObject jsPerfil=trae.perfilToJson(values,data);
-                     //s.addAll(data);
-                     if(data[0].equals(""))
-                         out.print("Datos no encontrados");
-                     else
-                         out.print(jsPerfil.toString());
-                 }else
-                   if(tipoPeticion.equals("2")){
-                       System.out.println("Estos son los intereses");
-                       Gson s=new Gson();
-                      
-                     
-                       
-                     String datos []={idUsr,clavUsr,tipo,nvoDato};
-                     if(!trae.datosVacios(datos))
-                     {
-                         respuesta=trae.modifDatosCta(idUsr,nvoDato, clavUsr, tipo);
-                         out.write(respuesta+trae.getError());
-                         if(respuesta.equals("Clave modificada")|| respuesta.equals("Correo modificado")){
-                            if(tipo.equals("2")||tipo.equals("3")){
-                                tipo=cred.Encriptar(tipo);
-                                idUsr=cred.Encriptar(idUsr);
-                                clavUsr=cred.Encriptar(clavUsr);
-                                nvoDato=cred.Encriptar(nvoDato);
-                                respuesta="5"+tipo+"|"+idUsr+"||"+clavUsr+"|||"+nvoDato;
-                                out.write(cred.pedirClave(respuesta));
-                            }
-                         }
-                     }else
-                         out.print(trae.getError());
-                   }else
-                    if(tipoPeticion.equals("3")){
-                        //activar cuenta
-                       String us="";
-                       String cl="";
-                       respuesta=trae.activarCuenta(token);
-                       //us=respuesta.substring(0,respuesta.indexOf("|"));
-                      // System.out.println(us);
-                       System.out.println(respuesta);
-                       if(!respuesta.equals("No se encontro la cuenta")){
-                           System.out.println("See");
-                           us=respuesta.substring(respuesta.indexOf("|")+1,respuesta.indexOf("||"));
-                           cl=respuesta.substring(respuesta.indexOf("||")+2);
-                           us=cred.Encriptar(us);
-                           cl=cred.Encriptar(cl);
-                           respuesta="2"+us+"|"+cl;
-                           out.write(cred.pedirClave(respuesta));
-                       }else
-                           out.write(respuesta);
-                   }
-                    else
-                        if(tipoPeticion.equals("4"))
-                        {
-                                String data[]=new String[4];
 
-                                
-                                String values[]={"nombre","correo","descripcion","imgPerfil"};
-                                String disableSeguir="false";
-                                
-                                if(Boolean.valueOf(visita))
-                                {
-                                   data=trae.traePerfil(visitante,0);
-                                   if(trae.seSiguen(visitante,idUsr))
-                                        disableSeguir="true";
-                                }else
-                                    data=trae.traePerfil(idUsr,0);
-                                JsonObject jsPerfil=trae.perfilToJson(values,data);
-                                jsPerfil.addProperty("seguir",disableSeguir);
-                                //s.addAll(data);
-                                if(data[0].equals(""))
-                                    out.print("Datos no encontrados");
-                                else
-                                    out.print(jsPerfil.toString());
+
+                if(tipoPeticion.equals("0"))
+                {
+
+
+                    respuesta=trae.getIntereses(idUsr);
+                    out.print(respuesta);
+                }else
+                    if(tipoPeticion.equals("1") && !idUsr.equals(""))
+                    {
+
+                        String data[]=new String[5];
+
+                        data=trae.traePerfil(idUsr,1);
+                        String values[]={"usr","psw","mail","descrip","preview"};
+                        JsonObject jsPerfil=trae.perfilToJson(values,data);
+                        //s.addAll(data);
+                        if(data[0].equals(""))
+                            out.print("Datos no encontrados");
+                        else
+                            out.print(jsPerfil.toString());
+                    }else
+                      if(tipoPeticion.equals("2")){
+                        String xUsr=cred.Encriptar(idUsr);
+                        String xPsw=cred.Encriptar(clavUsr);
+                        String dataConfirmacion="7"+xUsr+"|"+xPsw;
+                        String pase=cred.pedirClave(dataConfirmacion);
+                        System.out.println("Pasa?: "+pase);
+                        if(!pase.equals("Denegado")){
+                          //Modificar datos
+                            System.out.println("Estos son los intereses");
+                            Gson s=new Gson();
+                          String datos []={idUsr,clavUsr,tipo,nvoDato};
+                          if(!trae.datosVacios(datos))
+                          {
+                              respuesta=trae.modifDatosCta(idUsr,nvoDato, clavUsr, tipo);
+                              out.write(respuesta+trae.getError());
+                              if(respuesta.equals("Clave modificada")|| respuesta.equals("Correo modificado")){
+                                 if(tipo.equals("2")||tipo.equals("3")){
+                                     tipo=cred.Encriptar(tipo);
+                                     idUsr=cred.Encriptar(idUsr);
+                                     clavUsr=cred.Encriptar(clavUsr);
+                                     nvoDato=cred.Encriptar(nvoDato);
+                                     respuesta="5"+tipo+"|"+idUsr+"||"+clavUsr+"|||"+nvoDato;
+                                     out.write(cred.pedirClave(respuesta));
+                                 }
+                              }
+                          }else
+                              out.print(trae.getError());
                         }else
-                            if(tipoPeticion.equals("5") && paramBsq!=null)
-                            {
-                                out.write(trae.busquedaGeneral(paramBsq));
-                            }else
-                                if(tipoPeticion.equals("6"))
-                                {
-                                    String estatusSeguimiento="";
-                                    if(Boolean.valueOf(visita))
-                                    {
-                                       //if(!trae.seSiguen(visitante,idUsr))
-                                        estatusSeguimiento=trae.seguirCuenta(visitante, idUsr);
-                                        out.write(estatusSeguimiento);
-                                           
-                                    }
-                                }else
-                                    response.sendRedirect("login");
-           
+                            out.print("Modificación fallida: \n Tu contraseña no coincide.");
+                      }else
+                       if(tipoPeticion.equals("3")){
+                           //activar cuenta
+                          String us="";
+                          String cl="";
+                          respuesta=trae.activarCuenta(token);
+                          //us=respuesta.substring(0,respuesta.indexOf("|"));
+                         // System.out.println(us);
+                          System.out.println(respuesta);
+                          if(!respuesta.equals("No se encontro la cuenta")){
+                              System.out.println("See");
+                              us=respuesta.substring(respuesta.indexOf("|")+1,respuesta.indexOf("||"));
+                              cl=respuesta.substring(respuesta.indexOf("||")+2);
+                              us=cred.Encriptar(us);
+                              cl=cred.Encriptar(cl);
+                              respuesta="2"+us+"|"+cl;
+                              out.write(cred.pedirClave(respuesta));
+                          }else
+                              out.write(respuesta);
+                      }
+                       else
+                           if(tipoPeticion.equals("4"))
+                           {
+                                   String data[]=new String[4];
+
+
+                                   String values[]={"nombre","correo","descripcion","imgPerfil"};
+                                   String disableSeguir="false";
+
+                                   if(Boolean.valueOf(visita))
+                                   {
+                                      data=trae.traePerfil(visitante,0);
+                                      if(trae.seSiguen(visitante,idUsr))
+                                           disableSeguir="true";
+                                   }else
+                                       data=trae.traePerfil(idUsr,0);
+                                   JsonObject jsPerfil=trae.perfilToJson(values,data);
+                                   jsPerfil.addProperty("seguir",disableSeguir);
+                                   //s.addAll(data);
+                                   if(data[0].equals(""))
+                                       out.print("Datos no encontrados");
+                                   else
+                                       out.print(jsPerfil.toString());
+                           }else
+                               if(tipoPeticion.equals("5") && paramBsq!=null)
+                               {
+                                   out.write(trae.busquedaGeneral(paramBsq));
+                               }else
+                                   if(tipoPeticion.equals("6"))
+                                   {
+                                       String estatusSeguimiento="";
+                                       if(Boolean.valueOf(visita))
+                                       {
+                                          //if(!trae.seSiguen(visitante,idUsr))
+                                           estatusSeguimiento=trae.seguirCuenta(visitante, idUsr);
+                                           out.write(estatusSeguimiento);
+
+                                       }
+                                   }else
+                                       response.sendRedirect("login");
+
         }
     }
 

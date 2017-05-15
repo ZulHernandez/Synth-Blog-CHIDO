@@ -41,7 +41,7 @@ public class cDatos {private final int MYSQL = 0;
             //MySQL
             this.usrBD = "root";
             this.passBD = "n0m3l0";
-            this.urlBD = "jdbc:mysql://localhost:3306/synth";
+            this.urlBD = "jdbc:mysql://localhost:3306/snth";
             this.driverClassName = "com.mysql.jdbc.Driver";
         }else
         if(suich == POSTGRESQL){
@@ -95,8 +95,14 @@ public class cDatos {private final int MYSQL = 0;
     }
     
     //Cerrar la conexion de BD
-    public void cierraConexion() throws SQLException {
-        this.conn.close();
+    public void cierraConexion(){
+        try
+        {
+            this.conn.close();
+        }catch(SQLException e)
+        {
+            System.out.println("Error al cerrar conexión: "+e.getMessage());
+        }
     }
     
     //Metodos para ejecutar sentencias SQL
