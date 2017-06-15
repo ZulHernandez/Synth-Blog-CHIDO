@@ -28,6 +28,12 @@
                 padding-top: 3px;
                 color: white;
             }
+            button{
+                -webkit-transition:all .2s ease; /* Safari y Chrome */
+                -moz-transition:all .2s ease; /* Firefox */
+                -o-transition:all .2s ease; /* IE 9 */
+                -ms-transition:all .2s ease; /* Opera */
+            }
         </style>
         <div id="header"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MARSOFT&#174</b></div>
         <div class="mdl-layout--no-desktop-drawer-button mdl-layout mdl-js-layout">
@@ -36,14 +42,13 @@
                 <div class="mdl-layout__header-row">
                     <span class="mdl-layout-title" id="titulo2"><a href="../../index.html"><font color="white"><b>MARSOFT&#174</b></font></a></span>
                     <div class="mdl-layout-spacer"></div>
-
                     <nav class="mdl-navigation">
                         <a class="mdl-navigation__link" href="cono.html" onclick="muestra(1);"><b><font color="white">&laquo;CONOCENOS&raquo;</font></b></a>
                         <a class="mdl-navigation__link" href="prop.html"><b><font color="white">&laquo;PROPUESTAS&raquo; </font></b></a>
                         <a class="mdl-navigation__link" href="contacto.jsp"><b><font color="white">&laquo;CONTACTANOS&raquo; </font></b></a>
                         <a class="mdl-navigation__link" href="htm.html"><b><font color="white">&laquo;DO IT YOURSELF&raquo; </font></b></a>
-                        <a class="mdl-navigation__link" href="../../login" target="_blank"><b><font color="white">&laquo;BLOG&raquo; </font></b></a>
-                        <a class="mdl-navigation__link" href="descarga.html"><b><font color="white">&laquo;DESCARGAS&raquo;</font></b></a>
+                        <a class="mdl-navigation__link" href="descargas.html"><b><font color="white">&laquo;DOWNLOADS&raquo; </font></b></a>
+                        <a class="mdl-navigation__link" href="../../login" target="_blank"><b><font color="white">&laquo;SYNTH&#33;&raquo; </font></b></a>
                     </nav>
                 </div>
             </header>
@@ -54,8 +59,8 @@
                     <a class="mdl-navigation__link" href="prop.html"><b><font color="white">&laquo;PROPUESTAS&raquo; </font></b></a>
                     <a class="mdl-navigation__link" href="contacto.jsp"><b><font color="white">&laquo;CONTACTANOS&raquo; </font></b></a>
                     <a class="mdl-navigation__link" href="htm.html"><b><font color="white">&laquo;DO IT YOURSELF&raquo; </font></b></a>
-                    <a class="mdl-navigation__link" href="../../login" target="_blank"><b><font color="white">&laquo;BLOG&raquo; </font></b></a>
-                    <a class="mdl-navigation__link" href="descarga.html"><b><font color="white">&laquo;DESCARGAS&raquo;</font></b></a>
+                    <a class="mdl-navigation__link" href="descargas.html"><b><font color="white">&laquo;DOWNLOADS&raquo; </font></b></a>
+                    <a class="mdl-navigation__link" href="../../login" target="_blank"><b><font color="white">&laquo;SYNTH&#33;&raquo; </font></b></a>
                 </nav>
             </div>
         </div>
@@ -63,15 +68,15 @@
             <br/><br /><br/><br/><br/>
             <div id="destino4" name="destino4" class="destino">
                 <h1>SIMULADOR DE HTML</h1>
-                <p>PRIMERO QUE NADA... SABES HTML?</p>
+                <p>PRIMERO QUE NADA, &#191;SABES HTML?</p>
                 <center>
                     <input id="si" name="no" class="button" type="button" value="SI" onclick="active(this);"/>&nbsp;&nbsp;&nbsp;
                     <input id="no" name="no" class="button" type="button" value="NO" onclick="active(this);"/>
                 </center>
                 <div id="div1" name="div1" class="oculto">
-                    <h2>Escribe tu codigo HTML</h2>
+                    <h2>Escribe tu c&oacute;digo HTML</h2>
                     <input id="codigo" name="codigo" type="text" class="textoPrincipal"/>
-                    <br/><br/><button id="pruebalo" name="pruebalo"  class="button" style="width: auto" onclick="change();"/><span>PRUEBALO</span></button><br/><br/>
+                    <br/><br/><button id="pruebalo" name="pruebalo"  class="button" style="width: auto" onclick="change();"/><span>PRU&Eacute;BALO</span></button><br/><br/>
                     <div id="especial1" name="especial1" class="especial">
                     </div>
                 </div>

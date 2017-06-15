@@ -60,7 +60,7 @@
                 var pub = document.getElementById("pub");
                 var per = document.getElementById("per");
                 var cfg = document.getElementById("cfg");
-                var estadisticas = document.getElementById("estadisticas");
+                var gra = document.getElementById("graf");
 
                 if (largo1 > 975)
                 {
@@ -72,7 +72,7 @@
                     pub.innerHTML = "PUBLICAR";
                     per.innerHTML = "PERFIL";
                     cfg.innerHTML = "CONFIGURACI&Oacute;N";
-                    estadisticas.innerHTML = "ESTADISTICAS";
+                    gra.innerHTML = "ESTADISTICAS";
 
                 } else
                 {
@@ -84,6 +84,7 @@
                     pub.innerHTML = "<img src='imgs/icon/publicar.png' style='width:40px; padding-top:1px;'/>";
                     per.innerHTML = "<img src='imgs/icon/perfil.png' style='width:40px; padding-top:1px;'/>";
                     cfg.innerHTML = "<img src='imgs/icon/config.png' style='width:40px; padding-top:1px;'/>";
+                    gra.innerHTML = "<img src='imgs/icon/grafN.png' style='width:40px; padding-top:1px;'/>";
                 }
             }
 
@@ -103,7 +104,7 @@
                 var pub = document.getElementById("pub");
                 var per = document.getElementById("per");
                 var cfg = document.getElementById("cfg");
-                var estadisticas = document.getElementById("estadisticas");
+                var gra = document.getElementById("graf");
 
                 if (largo1 > 975)
                 {
@@ -115,7 +116,7 @@
                     pub.innerHTML = "PUBLICAR";
                     per.innerHTML = "PERFIL";
                     cfg.innerHTML = "CONFIGURACI&Oacute;N";
-                    estadisticas.innerHTML = "ESTADISTICAS";
+                    gra.innerHTML = "ESTADISTICAS";
 
                 } else
                 {
@@ -127,6 +128,7 @@
                     pub.innerHTML = "<img src='imgs/icon/publicar.png' style='width:40px; padding-top:1px;'/>";
                     per.innerHTML = "<img src='imgs/icon/perfil.png' style='width:40px; padding-top:1px;'/>";
                     cfg.innerHTML = "<img src='imgs/icon/config.png' style='width:40px; padding-top:1px;'/>";
+                    gra.innerHTML = "<img src='imgs/icon/grafN.png' style='width:40px; padding-top:1px;'/>";
                 }
             }
             window.onresize = function ()
@@ -140,7 +142,7 @@
                 var pub = document.getElementById("pub");
                 var per = document.getElementById("per");
                 var cfg = document.getElementById("cfg");
-                var estadisticas = document.getElementById("estadisticas");
+                var gra = document.getElementById("graf");
 
                 if (largo1 > 975)
                 {
@@ -152,7 +154,7 @@
                     pub.innerHTML = "PUBLICAR";
                     per.innerHTML = "PERFIL";
                     cfg.innerHTML = "CONFIGURACIÓN";
-                    estadisticas.innerHTML = "ESTADISTICAS";
+                    gra.innerHTML = "ESTADISTICAS";
 
                 } else
                 {
@@ -164,6 +166,7 @@
                     pub.innerHTML = "<img src='imgs/icon/publicar.png' style='width:40px; padding-top:1px;'/>";
                     per.innerHTML = "<img src='imgs/icon/perfil.png' style='width:40px; padding-top:1px;'/>";
                     cfg.innerHTML = "<img src='imgs/icon/config.png' style='width:40px; padding-top:1px;'/>";
+                    gra.innerHTML = "<img src='imgs/icon/grafN.png' style='width:40px; padding-top:1px;'/>";
                 }
             }
             function blanco(i)
@@ -175,6 +178,7 @@
                 var pub = document.getElementById("pub");
                 var per = document.getElementById("per");
                 var cfg = document.getElementById("cfg");
+                var gra = document.getElementById("graf");
 
                 if (largo1 < 975)
                 {
@@ -198,6 +202,8 @@
                         case 6:
                             cfg.innerHTML = "<img src='imgs/icon/configb.png' style='width:40px; padding-top:1px;'/>";
                             break;
+                        case 7:
+                            gra.innerHTML = "<img src='imgs/icon/grafB.png' style='width:40px; padding-top:1px;'/>";
                     }
 
                 }
@@ -293,7 +299,7 @@
                 <td style="width: 100%; padding-top: 0%;">
             <center>
                 <a href="acceso" target="_top"><button align="middle" class="head" type="button" id="salida" name="salida" value="Salir" style="border-top-left-radius: 25px; border-bottom-left-radius: 25px; border-left-width: 1.5px; border-left-width: 3px; width: 14%;" onmouseover="blanco(1);" onmouseout="out();"/><span id="sal"></span></button></a>
-                <a href="jsp/graficas.jsp" target="body"><button align="middle" class="head" type="button" id="estadisticas" name="estadisticas" value="Estadisticas" style="border-left-width: 1.5px; border-right-width: 1.5px; width: 14%;" onmouseover="blanco(2);" onmouseout="out();"/><span id="estad" ></span></button></a>
+                <a href="jsp/graficas.jsp" target="body"><button align="middle" class="head" type="button" id="estadisticas" name="estadisticas" value="Estadisticas" style="border-left-width: 1.5px; border-right-width: 1.5px; width: 14%;" onmouseover="blanco(7);" onmouseout="out();"/><span id="graf" ></span></button></a>
                 <a href="jsp/pUsuario.jsp" target="body"><button align="middle" class="head" type="button" id="inicio" name="inicio" value="Inicio" style="border-left-width: 1.5px; border-right-width: 1.5px; width: 14%;" onmouseover="blanco(2);" onmouseout="out();"/><span id="ini" ></span></button></a>
                 <a href="jsp/teoria.jsp" target="body"><button align="middle" class="head" type="button" id="teoria" name="teoria" value="Teoria" style="border-left-width: 1.5px; border-right-width: 1.5px; width: 14%;" onmouseover="blanco(3);" onmouseout="out();"/><span id="teo" ></span></button></a>
                 <a href="jsp/postear.jsp" target="body"><button align="middle" class="head" type="button" id="publicar" name="postear" value="Publicar" style="border-left-width: 1.5px; border-right-width: 1.5px; width: 14%;" onmouseover="blanco(4);" onmouseout="out();"/><span id="pub" ></span></button></a>

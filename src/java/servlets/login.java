@@ -162,16 +162,23 @@ public class login extends HttpServlet {
             "        <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\">\n" +
             "        <link href=\"css/login.css\" rel=\"stylesheet\" type=\"text/css\"/>\n" +
             "        <link rel=\"icon\" type=\"image/png\" href=\"imgs/sico.ico\"/>\n" +
-            "        <link href=\"styles/login.css\" rel=\"stylesheet\" type=\"text/css\"/>\n" +
-            "    </head>\n" +
-            "    <body>\n" +
+            "        <link href=\"styles/login.css\" rel=\"stylesheet\" type=\"text/css\"/><link href=\"css/style.css\" rel=\"stylesheet\" type=\"text/css\"/>\n" +
+            "    </head>\n<style>\n" +
+"        #particles-js\n" +
+"        {\n" +
+"            width: 100%;\n" +
+"            height: 130%;\n" +
+"        }\n" +
+"    </style>" +
+            "    <body>\n"
+                + "<div id=\"particles-js\"></div>\n" +
             "        <div id=\"todo\">\n" +
             "    "+ message +
             "            <div id=\"cabeza\">\n" +
             "                <center>\n" +
             "                    <img src=\"imgs/syntw.png\" style=\"width: 25%;\" align=\"middle\" />\n" +
             "                </center>\n" +
-            "            </div>\n" +
+            "            </div><br><br>\n" +
             "            <div id=\"cuerpo\">\n" +
             "                <div id=\"usuario\">\n" +
             "                    <center>\n" +
@@ -188,7 +195,7 @@ public class login extends HttpServlet {
             "                            <br/><br/>\n" +
             "                            <input type=\"button\" value=\"Ingresar\" id=\"boton\" onclick=\"valida();\"/>\n" +
             "                            <br/>\n" +
-            "                            <select id=\"base\" name=\"base\">" +
+            "                            <select style=\"display: none;\" id=\"base\" name=\"base\">" +
             "                                <option value=\"0\">MySQL (recomendado)</option>" +
             "                                <option value=\"1\">PostgreSQL</option>" +
             "                                <option value=\"2\">MariaDB</option>" +
@@ -214,7 +221,9 @@ public class login extends HttpServlet {
             "                    </center>\n" +
             "                </div>\n" +
             "            </div>\n" +
-            "        </div>    \n" +
+            "        </div>    \n"
+                + "<script src=\"css/particles.js\" type=\"text/javascript\"></script>\n" +
+"        <script src=\"css/app.js\" type=\"text/javascript\"></script>\n" +
             "    </body>\n" +
             "</html>";
     }

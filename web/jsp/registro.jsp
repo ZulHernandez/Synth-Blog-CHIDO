@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="../css/login.css" rel="stylesheet" type="text/css"/>
     <link rel="icon" type="image/png" href="../imgs/sico.ico"/>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
     <script>
         
        
@@ -144,6 +145,32 @@
         }
     </script>
     <script>
+        window.onload = function ()
+            {
+                var largo1 = window.innerWidth;
+                var escudo = document.getElementById("carreteSketch");
+
+                if (largo1 > 975)
+                {
+                    escudo.width = ""+ largo1*0.8;
+                } else
+                {
+                    escudo.width = "0";
+                }
+            }
+            window.onresize = function ()
+            {
+                var largo1 = window.innerWidth;
+                var escudo = document.getElementById("carreteSketch");
+
+                if (largo1 > 975)
+                {
+                    escudo.width = ""+ largo1*0.8;
+                } else
+                {
+                    escudo.width = "0";
+                }
+            }
          var arrayImgs=["imgCarrete1.png","imgCarrete2.png","imgCarrete3.png","imgCarrete4.png","imgCarrete5.png","imgCarrete6.png"];
         function procesaEnvio(){
             document.getElementById("tipoPeticion").value="0";
@@ -301,30 +328,31 @@
             outline:0px;
         }
         
-        #carreteSketch
-        {
-            width:55%;
-            height:55%;
-            
-           
-
-        }
     </style>
 </head>
+<style>
+        #particles-js
+        {
+            width: 100%;
+            height: 220%;
+        }
+    </style>
     <body onload="cargarImgSketch();">
+        <div id="particles-js"></div>
         <div id="todo">
             <div id="cabeza">
                 <center>
-                    <img src="../imgs/syntw.png" width= "25%" align="middle" />
+                    <img src="../imgs/syntw.png" id="cabe" width= "25%" align="middle" />
                 </center>
-            </div>
+            </div
+            <br><br>
             <div id="cuerpo" >
                 <center><b>
                         <p><txt>Registro</txt></p>
                         <table id="cuer">
                             <tr>
                                 <td >
-                                    <img id="carreteSketch" src="" data-numImg="">
+                                    <!--<img id="carreteSketch" src="" data-numImg="">-->
                                 </td>
                                 <td>
                             <center>
@@ -428,5 +456,7 @@
             <option value="Noviembre">11</option>
             <option value="Diciembre">12+</option>
         </datalist>
+        <script src="../css/particles.js" type="text/javascript"></script>
+        <script src="../css/app.js" type="text/javascript"></script>
     </body>
 </html>

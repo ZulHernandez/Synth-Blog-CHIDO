@@ -2,7 +2,7 @@
 /*CSS Document*/
 @font-face {
     font-family: "Roboto";
-    src: url("/Synth_BLOG/fuentes/Roboto-Regular.ttf") format("truetype");
+    src: url("/Geometry%20Drawtech%202.0/fuentes/Roboto-Regular.ttf") format("truetype");
 
 }
 
@@ -10,7 +10,7 @@ body
 {
     font-family: "Roboto";
     color: white;
-    background: url("../imgs/triangulos.jpg") no-repeat top center;
+    background: url("../imgs/rain.jpg") no-repeat top center;
     background-size: cover;
     overflow: hidden;
 }
@@ -33,10 +33,10 @@ txt
 
 #txt
 {
-    vertical-align: central;
-    margin: 2%;
     border-radius: 7px;
-    background-color: rgba(0,0,0,0.9); 
+    background-color: rgba(0,0,0,0.9);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    
 }
 
 #leer:link, #leer:visited, #leer:hover, #leer:active

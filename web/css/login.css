@@ -31,21 +31,21 @@ body
     font-family: "Roboto", sans-serif;
     background: url("../img/fondomusica1.jpg") no-repeat top center;
     background-position: fixed;
-    padding-top: 5%;
-    padding-left: 5%;
     zoom:1;
     
 }
 #cuerpo
 {
-    background-color: rgba(214,214,214,0.3);
+    background-color: rgba(214,214,214,0.5);
     padding: 20px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 
 }
 #cabeza
 {
     margin:0 auto 0 auto;
-    background-color: rgba(214,214,214,0.3);
+    background-color: rgba(214,214,214,0.5);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 
 }
 center
@@ -121,7 +121,10 @@ txt
 
 #todo
 {
-    width:90%;
+    width: 90%;
+    padding: 5%;
+    position: absolute;
+    z-index: 5;
 }
 
 #rc
@@ -143,4 +146,21 @@ hr
     border-style: inset;
     border-width: 2px;
     border-color: black;
+}
+
+#cabe
+{
+    -webkit-transition:all .2s ease; /* Safari y Chrome */
+    -moz-transition:all .2s ease; /* Firefox */
+    -o-transition:all .2s ease; /* IE 9 */
+    -ms-transition:all .2s ease; /* Opera */
+}
+
+#cabe:hover
+{
+    -webkit-transform:scale(1.5);
+    -moz-transform:scale(1.5);
+    -ms-transform:scale(1.5);
+    -o-transform:scale(1.5);
+    transform:scale(1.5);
 }

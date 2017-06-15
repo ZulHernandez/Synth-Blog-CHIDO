@@ -25,6 +25,7 @@
     <link rel="icon" type="image/png" href="../imgs/sico.ico"/>
     <script src="../scripts/validaRegistro.js" type="text/javascript"></script>
     <script src="../scripts/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <link href="../css/style.css" rel="stylesheet" type="text/css"/>
     <script>
         function validar(){
             var correoC=document.getElementById("mailc").value;
@@ -123,13 +124,22 @@
         }
     </script>
     </head>
+    <style>
+        #particles-js
+        {
+            width: 100%;
+            height: 130%;
+        }
+    </style>
     <body>
+        <div id="particles-js"></div>
         <div id="todo">
             <div id="cabeza">
                 <center>
-                    <img src="../imgs/syntw.png" width= "25%" align="middle" />
+                    <img src="../imgs/syntw.png" id="cabe" width= "25%" align="middle" />
                 </center>
             </div>
+            <br><br>
             <div id="cuerpo">
                 <center><b>
                         <p><txt>Recuperar cuenta</txt></p>
@@ -170,6 +180,8 @@
                         <hr><br>
                     </b></center>
             </div>
-        </div>    
+        </div>  
+        <script src="../css/particles.js" type="text/javascript"></script>
+        <script src="../css/app.js" type="text/javascript"></script>
     </body>
 </html>

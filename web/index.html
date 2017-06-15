@@ -9,6 +9,55 @@
         <link rel="icon" type="image/png" href="imgs/favicon.ico"/>
     </head>
     <body>
+        <script>
+            window.onload = function ()
+            {
+                var largo1 = window.innerWidth;
+                var largo2 = window.innerHeight;
+                var escudo = document.getElementById("escudo");
+                var espacio = document.getElementById("espacio");
+
+                if (largo2 < 670)
+                {
+                    espacio.innerHTML="<br/><br /><br/><br/>";
+                } else
+                {
+                    espacio.innerHTML="<br/><br /><br/><br/><br/><br /><br/><br/>";
+                }
+
+                if (largo1 > 975)
+                {
+                    escudo.width = "300";
+                } else
+                {
+                    escudo.width = "0";
+                }
+            }
+            window.onresize = function ()
+            {
+                var largo1 = window.innerWidth;
+                var escudo = document.getElementById("escudo");
+                var largo2 = window.innerHeight;
+                var espacio = document.getElementById("espacio");
+
+                if (largo2 < 670)
+                {
+                    espacio.innerHTML="<br/><br /><br/><br/>";
+                } else
+                {
+                    espacio.innerHTML="<br/><br /><br/><br/><br/><br /><br/><br/>";
+                }
+
+                if (largo1 > 975)
+                {
+                    escudo.width = "300";
+                } else
+                {
+                    escudo.width = "0";
+                }
+            }
+        </script>
+
         <style>
             .mdl-layout__header
             {
@@ -27,6 +76,33 @@
                 padding-top: 3px;
                 color: white;
             }
+            #escudo
+            {
+                -webkit-transition:all .9s ease; /* Safari y Chrome */
+                -moz-transition:all .9s ease; /* Firefox */
+                -o-transition:all .9s ease; /* IE 9 */
+                -ms-transition:all .9s ease; /* Opera */
+            }
+            #escudo:hover
+            {
+                -webkit-transform:scale(1.2);
+                -moz-transform:scale(1.2);
+                -ms-transform:scale(1.2);
+                -o-transform:scale(1.2);
+                transform:scale(1.2);
+            }
+
+            #txt
+            {
+                 -webkit-transition:all .9s ease; /* Safari y Chrome */
+                -moz-transition:all .9s ease; /* Firefox */
+                -o-transition:all .9s ease; /* IE 9 */
+                -ms-transition:all .9s ease; /* Opera */
+                border-radius: 7px;
+                background-color: rgba(0,0,0,0.9);
+                box-shadow: 0 0px 0px 0px rgba(0,0,0,0.2),0px 8px 20px 0px rgba(0,0,0,0.8);
+
+            }
         </style>
         <div id="header"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MARSOFT&#174;</b></div>
         <div class="mdl-layout--no-desktop-drawer-button mdl-layout mdl-js-layout">
@@ -40,7 +116,8 @@
                         <a class="mdl-navigation__link" href="principal/frames/prop.html"><b><font color="white">&laquo;PROPUESTAS&raquo; </font></b></a>
                         <a class="mdl-navigation__link" href="principal/frames/contacto.jsp"><b><font color="white">&laquo;CONTACTANOS&raquo; </font></b></a>
                         <a class="mdl-navigation__link" href="principal/frames/htm.html"><b><font color="white">&laquo;DO IT YOURSELF&raquo; </font></b></a>
-                        <a class="mdl-navigation__link" href="login" target="_blank"><b><font color="white">&laquo;BLOG&raquo; </font></b></a>
+                        <a class="mdl-navigation__link" href="principal/frames/descargas.html"><b><font color="white">&laquo;DOWNLOADS&raquo;</font></b></a>
+                        <a class="mdl-navigation__link" href="login" target="_blank"><b><font color="white">&laquo;SYNTH&#33;&raquo; </font></b></a>
                     </nav>
                 </div>
             </header>
@@ -51,28 +128,29 @@
                     <a class="mdl-navigation__link" href="principal/frames/prop.html"><b><font color="white">&laquo;PROPUESTAS&raquo; </font></b></a>
                     <a class="mdl-navigation__link" href="principal/frames/contacto.jsp"><b><font color="white">&laquo;CONTACTANOS&raquo; </font></b></a>
                     <a class="mdl-navigation__link" href="principal/frames/htm.html"><b><font color="white">&laquo;DO IT YOURSELF&raquo; </font></b></a>
-                    <a class="mdl-navigation__link" href="login" target="_blank"><b><font color="white">&laquo;BLOG&raquo; </font></b></a>
+                     <a class="mdl-navigation__link" href="principal/frames/descargas.html"><b><font color="white">&laquo;DOWNLOADS&raquo;</font></b></a>
+                    <a class="mdl-navigation__link" href="login" target="_blank"><b><font color="white">&laquo;SYNTH&#33;&raquo; </font></b></a>
                 </nav>
             </div>
         </div>
         <main class="mdl-layout__content">
-            <br/><br /><br/><br/>
+            <div id="espacio"></div>
             <div id="txt">
                 <br/><br /><center><b id="titulo">N</b><b id="titulo1">UESTRA </b><b id="titulo">E</b><b id="titulo1">MPRESA</b></center>
                 <p></p>
                 <br/><br/>
                 <center><table align="center" cellpadding="20px">
-                    <tr>
-                        <td><img src="principal/imgs/logo.jpg"  width="100%"/></td>
-                        <td>
-                            <txt>
-                                MARSOFT&#174 es una empresa dedicada al desarrollo de software didactico orientado a cualquier ambito de interes.
-                                Siempre buscando ofrecer la mejor relacion calidad precio en todos sus productos<a href="principal/frames/666.html" id="si">.</a>
-                                <p></p><a href="principal/frames/cono.html" id="leer"><i>LEER M&Aacute;S...</i></a>
-                            </txt>
+                        <tr>
+                            <td id="mor"><img id="escudo" src="imgs/MARSOFT.png"/></td>
+                            <td>
+                        <txt>
+                            MARSOFT&#174 es una empresa dedicada al desarrollo de software did&aacute;ctico orientado a cualquier &aacute;mbito de inter&eacute;s.
+                            Siempre buscando ofrecer la mejor relaci&oacute;n calidad precio en todos sus productos<a href="principal/frames/666.html" id="si">.</a>
+                            <p></p><a href="principal/frames/cono.html" id="leer"><i>LEER M&Aacute;S...</i></a>
+                        </txt>
                         </td>
-                    </tr>
-                </table> </center>
+                        </tr>
+                    </table> </center>
                 <br /><br /><br />
             </div>
         </main>
